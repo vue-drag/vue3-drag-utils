@@ -1,9 +1,6 @@
-<script setup lang="ts">
-import { DndProvider } from 'vue3-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-</script>
+<script setup lang="ts"></script>
 <template>
-  <DndProvider :backend="HTML5Backend">
+  <DndProvider>
     <RouterView />
   </DndProvider>
 </template>

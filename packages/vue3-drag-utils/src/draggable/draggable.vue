@@ -1,18 +1,21 @@
 <script setup lang="ts">
-// import { useDrag } from 'vue3-dnd';
+import { useDrag } from 'vue3-dnd';
 
-// const [collect, drag] = useDrag(() => ({
-//   type: 'CommonDrag',
-//   canDrag: true,
-//   collect: (monitor) => ({
-//     isDragging: monitor.isDragging(),
-//     handlerId: monitor.getHandlerId()
-//   })
-// }));
+const [collect, drag] = useDrag(() => ({
+  type: 'CommonDrag',
+  canDrag: true,
+  collect: (monitor) => ({
+    isDragging: monitor.isDragging(),
+    handlerId: monitor.getHandlerId()
+  })
+}));
 </script>
 <template>
-  <div class="box">
-    <div>998989898</div>
+  <div
+    class="box"
+    :ref="drag"
+  >
+    <div>111</div>
     <slot></slot>
   </div>
 </template>

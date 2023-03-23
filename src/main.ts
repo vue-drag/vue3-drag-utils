@@ -11,4 +11,5 @@ const app = createApp(App);
 app.use(router);
 app.use(pinia);
 app.use(vue3DragUtils);
+console.log(app._context.components);
 app.mount('#app');

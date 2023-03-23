@@ -9,8 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    DndProvider: typeof import('./../DndProvider/DndProvider.vue')['default']
     Draggable: typeof import('./../draggable/Draggable.vue')['default']
-    HButton: typeof import('./../button/HButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -1,10 +1,10 @@
+import DndProvider from './src/DndProvider';
 import draggable from './src/draggable';
-import button from './src/button';
 
 // Introduce on demand
-export { draggable, button };
+export { draggable };
 
-const components = [draggable, button];
+const components = [draggable, DndProvider];
 
 const install = (App: any) => {
   components.forEach((item) => {
