@@ -12,7 +12,7 @@
 </script>
 <template>
   <div class="box">
-    <div>12313</div>
+    <div>998989898</div>
     <slot></slot>
   </div>
 </template>

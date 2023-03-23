@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { draggable } from 'vue3-drag-utils';
-</script>
+<script setup lang="ts"></script>
 <template>
   <div>
     asd1

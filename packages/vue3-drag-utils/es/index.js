@@ -1,38 +1,40 @@
-import { defineComponent as _, openBlock as s, createElementBlock as a, renderSlot as d, pushScopeId as p, popScopeId as u, createElementVNode as i } from "vue";
-const m = (e) => (p("data-v-c335c7e5"), e = e(), u(), e), v = { class: "box" }, g = /* @__PURE__ */ m(() => /* @__PURE__ */ i("div", null, "12313", -1)), f = /* @__PURE__ */ _({
-  __name: "draggable",
-  setup(e) {
-    return (o, n) => (s(), a("div", v, [
-      g,
-      d(o.$slots, "default", {}, void 0, !0)
+import { defineComponent as c, openBlock as a, createElementBlock as s, renderSlot as p, pushScopeId as d, popScopeId as u, createElementVNode as i } from "vue";
+const m = (t) => (d("data-v-a2b3914b"), t = t(), u(), t), b = { class: "box" }, v = /* @__PURE__ */ m(() => /* @__PURE__ */ i("div", null, "998989898", -1)), f = /* @__PURE__ */ c({
+  __name: "Draggable",
+  setup(t) {
+    return (e, o) => (a(), s("div", b, [
+      v,
+      p(e.$slots, "default", {}, void 0, !0)
     ]));
   }
 });
-const b = (e, o) => {
-  const n = e.__vccOpts || e;
-  for (const [l, r] of o)
-    n[l] = r;
-  return n;
-}, c = /* @__PURE__ */ b(f, [["__scopeId", "data-v-c335c7e5"]]);
-c.install = (e) => {
-  e.component(c.__name, c);
+const g = (t, e) => {
+  const o = t.__vccOpts || t;
+  for (const [r, l] of e)
+    o[r] = l;
+  return o;
+}, n = /* @__PURE__ */ g(f, [["__scopeId", "data-v-a2b3914b"]]);
+n.install = (t) => {
+  t.component(n.__name, n);
 };
-const t = /* @__PURE__ */ _({
+const _ = /* @__PURE__ */ c({
   __name: "HButton",
-  setup(e) {
-    return (o, n) => (s(), a("div", null, "button"));
+  setup(t) {
+    return (e, o) => (a(), s("div", null, "button"));
   }
 });
-t.install = (e) => {
-  e.component(t.__name, t);
+_.install = (t) => {
+  t.component(_.__name, _);
 };
-const h = (e) => {
-  console.log("button1", e, t, t.__name), e.component("HButton", t);
-}, B = {
-  install: h
+const h = [n, _], x = (t) => {
+  h.forEach((e) => {
+    t.component(e.__name, e);
+  });
+}, S = {
+  install: x
 };
 export {
-  t as button,
-  B as default,
-  c as draggable
+  _ as button,
+  S as default,
+  n as draggable
 };

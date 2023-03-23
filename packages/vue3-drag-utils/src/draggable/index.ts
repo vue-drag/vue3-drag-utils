@@ -1,4 +1,4 @@
-import draggable from './draggable.vue';
+import draggable from './Draggable.vue';
 draggable.install = (App: any) => {
   App.component(draggable.__name, draggable);
 };
