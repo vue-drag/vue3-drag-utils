@@ -17,7 +17,7 @@
     "baseUrl": "./",
     "paths": {
       "@/*": [
-        "src/*"
+        "example/*"
       ]
     }
   },
@@ -26,10 +26,10 @@
     "vitest.config.*",
     "cypress.config.*",
     "playwright.config.*",
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "example/**/*.ts",
+    "example/**/*.d.ts",
+    "example/**/*.tsx",
+    "example/**/*.vue",
     "**/*.ts",
     "**/*.tsx"
   ]
