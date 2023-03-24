@@ -1,1 +1,1 @@
-@charset "UTF-8";.fade-move,.fade-enter-active,.fade-leave-active{transition:all .5s ease-in-out}.fade-enter-from,.fade-leave-to{opacity:0;transform:scaleY(.01) translate(30px)}.fade-leave-active{position:absolute}
+.list-enter-active[data-v-d95831d8],.list-leave-active[data-v-d95831d8]{transition:all .5s ease}.list-enter-from[data-v-d95831d8],.list-leave-to[data-v-d95831d8]{opacity:0;transform:translate(30px)}

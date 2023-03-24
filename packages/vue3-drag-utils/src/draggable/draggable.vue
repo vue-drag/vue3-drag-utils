@@ -28,14 +28,13 @@ const move = (dragIndex: number, hoverIndex: number) => {
   clone.splice(dragIndex, 1);
   clone.splice(hoverIndex, 0, item);
   dragList.value = clone;
-  // const clone = JSON.parse(JSON.stringify(dragList.value));
-  // const item = clone[dragIndex];
-  // dragList.value.splice(dragIndex, 1);
-  // dragList.value.splice(hoverIndex, 0, item);
 };
 </script>
 <template>
-  <div>
+  <TransitionGroup
+    name="list"
+    tag="div"
+  >
     <DraggableItem
       v-for="(item, index) in dragList"
       :key="itemKey ? item[itemKey] : item"
@@ -49,5 +48,17 @@ const move = (dragIndex: number, hoverIndex: number) => {
         :index="index"
       ></slot>
     </DraggableItem>
-  </div>
+  </TransitionGroup>
 </template>
+<style scoped lang="scss">
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>
