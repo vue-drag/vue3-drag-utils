@@ -32,5 +32,5 @@
     "src/**/*.vue",
     "**/*.ts",
     "**/*.tsx"
-, "packages/vue3-drag-utils/index.js", "packages/vue3-drag-utils/index.js"  ]
+  ]
 }

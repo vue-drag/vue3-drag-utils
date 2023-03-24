@@ -4,4 +4,8 @@
     <RouterView />
   </DndProvider>
 </template>
-<style scoped lang="scss"></style>
+<style lang="scss">
+body {
+  margin: 0;
+}
+</style>
