@@ -26,7 +26,12 @@ export default defineConfig(() => {
           /\.vue\?vue/, // .vue
           /\.md$/ // .md
         ],
-        imports: ['vue'],
+        imports: [
+          'vue',
+          {
+            '@vueuse/core': ['useCloned', 'useDebounceFn']
+          }
+        ],
         dts: 'src/types/auto-imports.d.ts',
         // 兼容eslint
         eslintrc: {
@@ -45,7 +50,6 @@ export default defineConfig(() => {
       }
     },
     build: {
-      outDir: 'lib',
       minify: true,
       lib: {
         entry: resolve(__dirname, './index.ts'), //指定组件编译入口文件
