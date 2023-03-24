@@ -331,9 +331,9 @@ function qt(t) {
     return "array";
   if (Wt(t))
     return "date";
-  if (Bt(t))
+  if (Gt(t))
     return "error";
-  var r = Gt(t);
+  var r = Bt(t);
   switch (r) {
     case "Symbol":
     case "Promise":
@@ -345,10 +345,10 @@ function qt(t) {
   }
   return e.slice(8, -1).toLowerCase().replace(/\s/g, "");
 }
-function Gt(t) {
+function Bt(t) {
   return typeof t.constructor == "function" ? t.constructor.name : null;
 }
-function Bt(t) {
+function Gt(t) {
   return t instanceof Error || typeof t.message == "string" && t.constructor && typeof t.constructor.stackTraceLimit == "number";
 }
 function Wt(t) {
@@ -841,7 +841,7 @@ function K(t, e) {
   d(typeof t == "string" || typeof t == "symbol", e ? "Type can only be a string, a symbol, or an array of either." : "Type can only be a string or a symbol.");
 }
 const pe = typeof global < "u" ? global : self, qe = pe.MutationObserver || pe.WebKitMutationObserver;
-function Ge(t) {
+function Be(t) {
   return function() {
     const r = setTimeout(i, 0), n = setInterval(i, 50);
     function i() {
@@ -895,7 +895,7 @@ const Tr = typeof qe == "function" ? (
   // - Internet Explorer 6-9
   // - iPad Safari 4.3
   // - Lynx 2.8.7
-  Ge
+  Be
 );
 class br {
   // Use the fastest means possible to execute a task in its own turn, with
@@ -926,7 +926,7 @@ class br {
       e.length = 0, this.index = 0, this.flushing = !1;
     }, this.registerPendingError = (e) => {
       this.pendingErrors.push(e), this.requestErrorThrow();
-    }, this.requestFlush = Tr(this.flush), this.requestErrorThrow = Ge(() => {
+    }, this.requestFlush = Tr(this.flush), this.requestErrorThrow = Be(() => {
       if (this.pendingErrors.length)
         throw this.pendingErrors.shift();
     });
@@ -958,9 +958,9 @@ class Er {
     this.onError = e, this.freeTasks = [];
   }
 }
-const Be = new br(), wr = new Er(Be.registerPendingError);
+const Ge = new br(), wr = new Er(Ge.registerPendingError);
 function Cr(t) {
-  Be.enqueueTask(wr.create(t));
+  Ge.enqueueTask(wr.create(t));
 }
 function _r(t) {
   const e = yr().toString();
@@ -1196,7 +1196,7 @@ function Fr(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
-var q = !1, G = !1, Vr = /* @__PURE__ */ function() {
+var q = !1, B = !1, Vr = /* @__PURE__ */ function() {
   function t(r) {
     Fr(this, t), this.sourceId = null, this.internalMonitor = r.getMonitor();
   }
@@ -1215,11 +1215,11 @@ var q = !1, G = !1, Vr = /* @__PURE__ */ function() {
   }, e.isDragging = function() {
     if (!this.sourceId)
       return !1;
-    d(!G, "You may not call monitor.isDragging() inside your isDragging() implementation. Read more: http://react-dnd.github.io/react-dnd/docs/api/drag-source-monitor");
+    d(!B, "You may not call monitor.isDragging() inside your isDragging() implementation. Read more: http://react-dnd.github.io/react-dnd/docs/api/drag-source-monitor");
     try {
-      return G = !0, this.internalMonitor.isDraggingSource(this.sourceId);
+      return B = !0, this.internalMonitor.isDraggingSource(this.sourceId);
     } finally {
-      G = !1;
+      B = !1;
     }
   }, e.subscribeToStateChange = function(n, i) {
     return this.internalMonitor.subscribeToStateChange(n, i);
@@ -1263,7 +1263,7 @@ function qr(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
-var B = !1, Gr = /* @__PURE__ */ function() {
+var G = !1, Br = /* @__PURE__ */ function() {
   function t(r) {
     qr(this, t), this.targetId = null, this.internalMonitor = r.getMonitor();
   }
@@ -1277,11 +1277,11 @@ var B = !1, Gr = /* @__PURE__ */ function() {
   }, e.canDrop = function() {
     if (!this.targetId)
       return !1;
-    d(!B, "You may not call monitor.canDrop() inside your canDrop() implementation. Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target-monitor");
+    d(!G, "You may not call monitor.canDrop() inside your canDrop() implementation. Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target-monitor");
     try {
-      return B = !0, this.internalMonitor.canDropOnTarget(this.targetId);
+      return G = !0, this.internalMonitor.canDropOnTarget(this.targetId);
     } finally {
-      B = !1;
+      G = !1;
     }
   }, e.isOver = function(n) {
     return this.targetId ? this.internalMonitor.isOverTarget(this.targetId, n) : !1;
@@ -1304,7 +1304,7 @@ var B = !1, Gr = /* @__PURE__ */ function() {
   }, e.getDifferenceFromInitialOffset = function() {
     return this.internalMonitor.getDifferenceFromInitialOffset();
   }, t;
-}(), Br = function(t) {
+}(), Gr = function(t) {
   return t && typeof Symbol < "u" && t.constructor === Symbol ? "symbol" : typeof t;
 };
 function Wr(t) {
@@ -1314,7 +1314,7 @@ function Yr(t) {
   return t ? t.__v_skip : !1;
 }
 function Xr(t) {
-  return Wr(t) && Br(t.type) !== "symbol";
+  return Wr(t) && Gr(t.type) !== "symbol";
 }
 function zr() {
   throw new Error("Only native element nodes can now be passed to Vue DnD connectors.You can either wrap Component into a <div>, or turn it into a drag source or a drop target itself.");
@@ -1926,7 +1926,7 @@ function Hn(t, e, r) {
 function $n() {
   var t = _();
   return m(function() {
-    return new Gr(c(t));
+    return new Br(c(t));
   });
 }
 function jn(t) {
@@ -1976,7 +1976,7 @@ function qn(t, e) {
     (o) => i.push(o)
   ), i;
 }
-class Gn {
+class Bn {
   enter(e) {
     const r = this.entered.length, n = (i) => this.isNodeInDocument(i) && (!i.contains || i.contains(e));
     return this.entered = qn(this.entered.filter(n), [
@@ -1994,7 +1994,7 @@ class Gn {
     this.entered = [], this.isNodeInDocument = e;
   }
 }
-class Bn {
+class Gn {
   initializeExposedProperties() {
     Object.keys(this.config.exposeProperties).forEach((e) => {
       Object.defineProperty(this.item, e, {
@@ -2095,7 +2095,7 @@ function Wn(t, e) {
   const r = Z[t];
   if (!r)
     throw new Error(`native type ${t} has no configuration`);
-  const n = new Bn(r);
+  const n = new Gn(r);
   return n.loadDataTransfer(e), n;
 }
 function Y(t) {
@@ -2516,7 +2516,7 @@ class ei {
     }, this.handleSelectStart = (i) => {
       const o = i.target;
       typeof o.dragDrop == "function" && (o.tagName === "INPUT" || o.tagName === "SELECT" || o.tagName === "TEXTAREA" || o.isContentEditable || (i.preventDefault(), o.dragDrop()));
-    }, this.options = new Jn(r, n), this.actions = e.getActions(), this.monitor = e.getMonitor(), this.registry = e.getRegistry(), this.enterLeaveCounter = new Gn(this.isNodeInDocument);
+    }, this.options = new Jn(r, n), this.actions = e.getActions(), this.monitor = e.getMonitor(), this.registry = e.getRegistry(), this.enterLeaveCounter = new Bn(this.isNodeInDocument);
   }
 }
 const ti = function(e, r, n) {
@@ -2553,11 +2553,15 @@ const ri = /* @__PURE__ */ x({
       })
     })), [, n] = Fn(() => ({
       accept: ["drag"],
-      drop: (s) => {
+      hover: (s, a) => {
+        var p;
         if (!i.value)
           return;
-        const a = s.index, u = e.index;
-        a !== u && (console.log(s), e.move(a, u), s.index = u);
+        const u = s.index, l = e.index;
+        if (u === l)
+          return;
+        const g = (p = i.value) == null ? void 0 : p.getBoundingClientRect(), v = a.getClientOffset();
+        console.log("monitor", g, v), e.move(u, l), s.index = l;
       }
     })), i = ee(), o = (s) => {
       i.value = r(n(s));
@@ -2655,7 +2659,7 @@ const Di = /* @__PURE__ */ x({
   props: {
     name: { default: "drag" },
     list: null,
-    itemKey: null
+    itemKey: { default: "id" }
   },
   emits: ["update:list"],
   setup(t, { emit: e }) {
@@ -2667,8 +2671,8 @@ const Di = /* @__PURE__ */ x({
         console.log("dragList", o), e("update:list", o);
       }
     }), i = (o, s) => {
-      const a = [...n.value], u = a[o];
-      a.splice(o, 1), a.splice(s, 0, u), n.value = a;
+      const u = [...n.value][o];
+      n.value.splice(o, 1), n.value.splice(s, 0, u);
     };
     return (o, s) => {
       const a = ri;
@@ -2702,7 +2706,7 @@ const Oi = (t, e) => {
   for (const [n, i] of e)
     r[n] = i;
   return r;
-}, k = /* @__PURE__ */ Oi(Di, [["__scopeId", "data-v-d95831d8"]]);
+}, k = /* @__PURE__ */ Oi(Di, [["__scopeId", "data-v-a12ad917"]]);
 k.install = (t) => {
   t.component(k.__name, k);
 };

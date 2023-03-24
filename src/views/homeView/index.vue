@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const list1: any = ref([]);
 const list2: any = ref([]);
-for (let i = 0, len = 5; i < len; i++) {
+for (let i = 0, len = 50; i < len; i++) {
   list1.value.push({
     id: i,
     name: `boxA${i}`
@@ -38,15 +38,6 @@ watch(
             delete
           </button>
         </div>
-      </template>
-    </draggable>
-    <draggable
-      v-model:list="list2"
-      class="container"
-      item-key="id"
-    >
-      <template #item="{ data }">
-        <div class="box">{{ data.name }}</div>
       </template>
     </draggable>
   </div>

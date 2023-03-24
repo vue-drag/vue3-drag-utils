@@ -21,7 +21,8 @@ const [, drag] = useDrag(() => ({
 }));
 const [, drop] = useDrop(() => ({
   accept: ['drag'],
-  drop: (item: any) => {
+  hover: (item: any, monitor: any) => {
+    // console.log(monitor.getClientOffset());
     if (!dragRef.value) {
       return;
     }
@@ -30,13 +31,15 @@ const [, drop] = useDrop(() => ({
     if (dragIndex === hoverIndex) {
       return;
     }
-    console.log(item);
+    const dropRect = dragRef.value?.getBoundingClientRect();
+    const clientOffset = monitor.getClientOffset();
+    console.log('monitor', dropRect, clientOffset);
     props.move(dragIndex, hoverIndex);
     item.index = hoverIndex;
   }
 }));
 
-const dragRef = ref<HTMLDivElement>();
+const dragRef: any = ref<HTMLDivElement>();
 const setRef: any = (el: HTMLDivElement) => {
   dragRef.value = drag(drop(el)) as HTMLDivElement;
 };
@@ -55,4 +58,3 @@ watch(
     <slot></slot>
   </div>
 </template>
-<style scoped lang="scss"></style>

@@ -5,7 +5,7 @@ import pinia from './stores';
 import './assets/styles/main.scss';
 
 import vue3DragUtils from 'vue3-drag-utils';
-// import 'vue3-drag-utils/es/style.css';
+import 'vue3-drag-utils/es/style.css';
 
 const app = createApp(App);
 app.use(router);

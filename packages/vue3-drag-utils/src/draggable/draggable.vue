@@ -9,7 +9,8 @@ const props = withDefaults(
     itemKey?: string;
   }>(),
   {
-    name: 'drag'
+    name: 'drag',
+    itemKey: 'id'
   }
 );
 const dragList = computed({
@@ -25,9 +26,11 @@ const dragList = computed({
 const move = (dragIndex: number, hoverIndex: number) => {
   const clone = [...dragList.value];
   const item = clone[dragIndex];
-  clone.splice(dragIndex, 1);
-  clone.splice(hoverIndex, 0, item);
-  dragList.value = clone;
+  // clone.splice(dragIndex, 1);
+  // clone.splice(hoverIndex, 0, item);
+  // dragList.value = clone;
+  dragList.value.splice(dragIndex, 1);
+  dragList.value.splice(hoverIndex, 0, item);
 };
 </script>
 <template>
@@ -53,12 +56,12 @@ const move = (dragIndex: number, hoverIndex: number) => {
 <style scoped lang="scss">
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.24s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: scale(0.6);
 }
 </style>
