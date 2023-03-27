@@ -1,34 +1,30 @@
 import navParser from '@vitepress-custom/vitepress-plugin-nav';
 import sidebar from '@vitepress-custom/vitepress-plugin-sidebar';
 import docsData from '@vitepress-custom/vitepress-plugin-fetch-docs';
+import { URL, fileURLToPath } from 'node:url';
+import AutoImport from 'unplugin-auto-import/vite';
 
 export default async () => {
   let pages = await docsData();
   return {
-    title: 'vitepres-custom',
-    description: 'vitepres-custom.',
+    title: 'Vue3-Drag-Utils',
+    description: 'Vue3-Drag-Utils.',
     head: [
       ['link', { rel: 'icon', href: 'favicon.ico' }] //浏览器标签icon
     ],
     themeConfig: {
       pages, // 所有页面
-      siteTitle: 'vue3-drag-utils', //导航栏左侧名称
+      siteTitle: 'Vue3-Drag-Utils', //导航栏左侧名称
       logo: '/static/nav-logo.svg', //导航栏左侧头像
       lastUpdated: true, //最后更新时间
       outlineTitle: 'Catalog', //右侧 侧边栏标题
       // 导航栏
-      nav: [
-        ...navParser(pages, 'contents'),
-        {
-          text: 'Example',
-          link: 'https://huyikai.xyz'
-        }
-      ],
+      nav: [...navParser(pages, 'contents')],
       // 侧边栏
       sidebar: sidebar(pages, 'docs', true),
       // 社交链接
       socialLinks: [
-        { icon: 'github', link: 'https://github.com/vitepress-custom' }
+        { icon: 'github', link: 'https://github.com/huyikai/vue3-drag-utils' }
       ],
       // 网站页脚
       footer: {
@@ -43,6 +39,34 @@ export default async () => {
       markdown: {
         lineNumbers: true
       }
+    },
+    vite: {
+      server: {
+        // open: '/contents/Example/simple.html',
+      },
+      resolve: {
+        alias: {
+          '@': fileURLToPath(new URL('./../../docs', import.meta.url))
+        }
+      },
+      plugins: [
+        AutoImport({
+          /* options */
+          include: [
+            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+            /\.vue$/,
+            /\.vue\?vue/, // .vue
+            /\.md$/ // .md
+          ],
+          imports: ['vue'],
+          // Generate automatically imported TS claim file
+          dts: './../types/auto-imports.d.ts',
+          // compatible eslint
+          eslintrc: {
+            enabled: true // Default `false`
+          }
+        })
+      ]
     }
   };
 };

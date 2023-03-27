@@ -52,9 +52,15 @@ watch(
 </script>
 <template>
   <div
+    class="draggable-item"
     :ref="setRef"
     :key="index"
   >
     <slot></slot>
   </div>
 </template>
+<style scoped lang="scss">
+.draggable-item {
+  cursor: move;
+}
+</style>

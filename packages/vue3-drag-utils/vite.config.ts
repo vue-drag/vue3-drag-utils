@@ -1,5 +1,4 @@
 import { defineConfig, loadEnv } from 'vite';
-import type { ConfigEnv } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';

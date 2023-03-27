@@ -12,7 +12,5 @@ declare module '@vue/runtime-core' {
     DndProvider: typeof import('./../DndProvider/DndProvider.vue')['default']
     Draggable: typeof import('./../Draggable/Draggable.vue')['default']
     DraggableItem: typeof import('./../DraggableItem/DraggableItem.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
   }
 }

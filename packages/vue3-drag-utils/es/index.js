@@ -1,20 +1,20 @@
-import { provide as ot, inject as st, defineComponent as x, onUnmounted as at, watchEffect as I, isRef as Le, unref as c, computed as m, ref as ee, reactive as ut, openBlock as N, createBlock as X, withCtx as z, renderSlot as te, watch as He, createElementBlock as $e, TransitionGroup as ct, Fragment as lt, renderList as dt } from "vue";
+import { provide as st, inject as at, defineComponent as x, onUnmounted as ut, watchEffect as I, isRef as Le, unref as c, computed as m, ref as ee, reactive as ct, openBlock as N, createBlock as X, withCtx as z, renderSlot as te, watch as He, createElementBlock as $e, TransitionGroup as lt, Fragment as dt, renderList as ft } from "vue";
 function le(t, e, r) {
   return Array.isArray(t) ? (t.length = Math.max(t.length, e), t.splice(e, 1, r), r) : (t[e] = r, r);
 }
 var je = Symbol("DndContextType");
-function ft(t) {
-  ot(je, t);
+function gt(t) {
+  st(je, t);
 }
-function gt() {
-  return st(je);
+function ht() {
+  return at(je);
 }
 var b;
 (function(t) {
   t.SOURCE = "SOURCE", t.TARGET = "TARGET";
 })(b || (b = {}));
 function d(t, e, ...r) {
-  if (ht() && e === void 0)
+  if (pt() && e === void 0)
     throw new Error("invariant requires an error message argument");
   if (!t) {
     let n;
@@ -29,7 +29,7 @@ function d(t, e, ...r) {
     throw n.framesToPop = 1, n;
   }
 }
-function ht() {
+function pt() {
   return typeof process < "u" && process.env.NODE_ENV === "production";
 }
 const re = "dnd-core/INIT_COORDS", L = "dnd-core/BEGIN_DRAG", ne = "dnd-core/PUBLISH_DRAG_SOURCE", H = "dnd-core/HOVER", $ = "dnd-core/DROP", j = "dnd-core/END_DRAG";
@@ -42,13 +42,13 @@ function de(t, e) {
     }
   };
 }
-function pt(t, e, r) {
+function vt(t, e, r) {
   return e.split(".").reduce(
     (n, i) => n && n[i] ? n[i] : r || null,
     t
   );
 }
-function vt(t, e) {
+function mt(t, e) {
   return t.filter(
     (r) => r !== e
   );
@@ -56,7 +56,7 @@ function vt(t, e) {
 function Ue(t) {
   return typeof t == "object";
 }
-function mt(t, e) {
+function yt(t, e) {
   const r = /* @__PURE__ */ new Map(), n = (o) => {
     r.set(o, r.has(o) ? r.get(o) + 1 : 1);
   };
@@ -66,40 +66,40 @@ function mt(t, e) {
     o === 1 && i.push(s);
   }), i;
 }
-function yt(t, e) {
+function Dt(t, e) {
   return t.filter(
     (r) => e.indexOf(r) > -1
   );
 }
-const Dt = {
+const Ot = {
   type: re,
   payload: {
     clientOffset: null,
     sourceClientOffset: null
   }
 };
-function Ot(t) {
+function St(t) {
   return function(r = [], n = {
     publishSource: !0
   }) {
     const { publishSource: i = !0, clientOffset: o, getSourceClientOffset: s } = n, a = t.getMonitor(), u = t.getRegistry();
-    t.dispatch(de(o)), St(r, a, u);
-    const l = It(r, a);
+    t.dispatch(de(o)), Tt(r, a, u);
+    const l = Et(r, a);
     if (l == null) {
-      t.dispatch(Dt);
+      t.dispatch(Ot);
       return;
     }
     let g = null;
     if (o) {
       if (!s)
         throw new Error("getSourceClientOffset must be defined");
-      Tt(s), g = s(l);
+      bt(s), g = s(l);
     }
     t.dispatch(de(o, g));
     const p = u.getSource(l).beginDrag(a, l);
     if (p == null)
       return;
-    bt(p), u.pinSource(l);
+    It(p), u.pinSource(l);
     const f = u.getSourceType(l);
     return {
       type: L,
@@ -114,18 +114,18 @@ function Ot(t) {
     };
   };
 }
-function St(t, e, r) {
+function Tt(t, e, r) {
   d(!e.isDragging(), "Cannot call beginDrag while dragging."), t.forEach(function(n) {
     d(r.getSource(n), "Expected sourceIds to be registered.");
   });
 }
-function Tt(t) {
+function bt(t) {
   d(typeof t == "function", "When clientOffset is provided, getSourceClientOffset must be a function.");
 }
-function bt(t) {
+function It(t) {
   d(Ue(t), "Item must be an object.");
 }
-function It(t, e) {
+function Et(t, e) {
   let r = null;
   for (let n = t.length - 1; n >= 0; n--)
     if (e.canDragSource(t[n])) {
@@ -134,7 +134,7 @@ function It(t, e) {
     }
   return r;
 }
-function Et(t) {
+function wt(t) {
   return function() {
     if (t.getMonitor().isDragging())
       return {
@@ -147,13 +147,13 @@ function Q(t, e) {
     (r) => r === e
   ) : t === e;
 }
-function wt(t) {
+function Ct(t) {
   return function(r, { clientOffset: n } = {}) {
-    Ct(r);
+    _t(r);
     const i = r.slice(0), o = t.getMonitor(), s = t.getRegistry();
-    _t(i, o, s);
+    Nt(i, o, s);
     const a = o.getItemType();
-    return Nt(i, s, a), Pt(i, o, s), {
+    return Pt(i, s, a), xt(i, o, s), {
       type: H,
       payload: {
         targetIds: i,
@@ -162,10 +162,10 @@ function wt(t) {
     };
   };
 }
-function Ct(t) {
+function _t(t) {
   d(Array.isArray(t), "Expected targetIds to be an array.");
 }
-function _t(t, e, r) {
+function Nt(t, e, r) {
   d(e.isDragging(), "Cannot call hover while not dragging."), d(!e.didDrop(), "Cannot call hover after drop.");
   for (let n = 0; n < t.length; n++) {
     const i = t[n];
@@ -174,18 +174,18 @@ function _t(t, e, r) {
     d(o, "Expected targetIds to be registered.");
   }
 }
-function Nt(t, e, r) {
+function Pt(t, e, r) {
   for (let n = t.length - 1; n >= 0; n--) {
     const i = t[n], o = e.getTargetType(i);
     Q(o, r) || t.splice(n, 1);
   }
 }
-function Pt(t, e, r) {
+function xt(t, e, r) {
   t.forEach(function(n) {
     r.getTarget(n).hover(e, n);
   });
 }
-function xt(t, e, r) {
+function Rt(t, e, r) {
   return e in t ? Object.defineProperty(t, e, {
     value: r,
     enumerable: !0,
@@ -193,69 +193,69 @@ function xt(t, e, r) {
     writable: !0
   }) : t[e] = r, t;
 }
-function Rt(t) {
+function At(t) {
   for (var e = 1; e < arguments.length; e++) {
     var r = arguments[e] != null ? arguments[e] : {}, n = Object.keys(r);
     typeof Object.getOwnPropertySymbols == "function" && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(i) {
       return Object.getOwnPropertyDescriptor(r, i).enumerable;
     }))), n.forEach(function(i) {
-      xt(t, i, r[i]);
+      Rt(t, i, r[i]);
     });
   }
   return t;
 }
-function At(t) {
+function Mt(t) {
   return function(r = {}) {
     const n = t.getMonitor(), i = t.getRegistry();
-    Mt(n), Ht(n).forEach((s, a) => {
-      const u = kt(s, a, i, n), l = {
+    kt(n), $t(n).forEach((s, a) => {
+      const u = Lt(s, a, i, n), l = {
         type: $,
         payload: {
-          dropResult: Rt({}, r, u)
+          dropResult: At({}, r, u)
         }
       };
       t.dispatch(l);
     });
   };
 }
-function Mt(t) {
+function kt(t) {
   d(t.isDragging(), "Cannot call drop while not dragging."), d(!t.didDrop(), "Cannot call drop twice during one drag operation.");
 }
-function kt(t, e, r, n) {
+function Lt(t, e, r, n) {
   const i = r.getTarget(t);
   let o = i ? i.drop(n, t) : void 0;
-  return Lt(o), typeof o > "u" && (o = e === 0 ? {} : n.getDropResult()), o;
-}
-function Lt(t) {
-  d(typeof t > "u" || Ue(t), "Drop result must either be an object or undefined.");
+  return Ht(o), typeof o > "u" && (o = e === 0 ? {} : n.getDropResult()), o;
 }
 function Ht(t) {
+  d(typeof t > "u" || Ue(t), "Drop result must either be an object or undefined.");
+}
+function $t(t) {
   const e = t.getTargetIds().filter(t.canDropOnTarget, t);
   return e.reverse(), e;
 }
-function $t(t) {
+function jt(t) {
   return function() {
     const r = t.getMonitor(), n = t.getRegistry();
-    jt(r);
+    Ut(r);
     const i = r.getSourceId();
     return i != null && (n.getSource(i, !0).endDrag(r, i), n.unpinSource()), {
       type: j
     };
   };
 }
-function jt(t) {
+function Ut(t) {
   d(t.isDragging(), "Cannot call endDrag while not dragging.");
 }
-function Ut(t) {
+function Ft(t) {
   return {
-    beginDrag: Ot(t),
-    publishDragSource: Et(t),
-    hover: wt(t),
-    drop: At(t),
-    endDrag: $t(t)
+    beginDrag: St(t),
+    publishDragSource: wt(t),
+    hover: Ct(t),
+    drop: Mt(t),
+    endDrag: jt(t)
   };
 }
-class Ft {
+class Vt {
   receiveBackend(e) {
     this.backend = e;
   }
@@ -276,7 +276,7 @@ class Ft {
         typeof a < "u" && r(a);
       };
     }
-    const i = Ut(this);
+    const i = Ft(this);
     return Object.keys(i).reduce((o, s) => {
       const a = i[s];
       return o[s] = n(a), o;
@@ -306,14 +306,14 @@ var fe = function() {
     return "@@redux/PROBE_UNKNOWN_ACTION" + V();
   }
 };
-function Vt(t) {
+function qt(t) {
   if (typeof t != "object" || t === null)
     return !1;
   for (var e = t; Object.getPrototypeOf(e) !== null; )
     e = Object.getPrototypeOf(e);
   return Object.getPrototypeOf(t) === e;
 }
-function qt(t) {
+function Bt(t) {
   if (t === void 0)
     return "undefined";
   if (t === null)
@@ -329,11 +329,11 @@ function qt(t) {
   }
   if (Array.isArray(t))
     return "array";
-  if (Wt(t))
+  if (Yt(t))
     return "date";
-  if (Gt(t))
+  if (Wt(t))
     return "error";
-  var r = Bt(t);
+  var r = Gt(t);
   switch (r) {
     case "Symbol":
     case "Promise":
@@ -345,18 +345,18 @@ function qt(t) {
   }
   return e.slice(8, -1).toLowerCase().replace(/\s/g, "");
 }
-function Bt(t) {
+function Gt(t) {
   return typeof t.constructor == "function" ? t.constructor.name : null;
 }
-function Gt(t) {
+function Wt(t) {
   return t instanceof Error || typeof t.message == "string" && t.constructor && typeof t.constructor.stackTraceLimit == "number";
 }
-function Wt(t) {
+function Yt(t) {
   return t instanceof Date ? !0 : typeof t.toDateString == "function" && typeof t.getDate == "function" && typeof t.setDate == "function";
 }
 function w(t) {
   var e = typeof t;
-  return process.env.NODE_ENV !== "production" && (e = qt(t)), e;
+  return process.env.NODE_ENV !== "production" && (e = Bt(t)), e;
 }
 function Fe(t, e, r) {
   var n;
@@ -395,7 +395,7 @@ function Fe(t, e, r) {
     };
   }
   function p(h) {
-    if (!Vt(h))
+    if (!qt(h))
       throw new Error(process.env.NODE_ENV === "production" ? T(7) : "Actions must be plain objects. Instead, the actual type was: '" + w(h) + "'. You may need to add middleware to your store setup to handle dispatching other values, such as 'redux-thunk' to handle dispatching functions. See https://redux.js.org/tutorials/fundamentals/part-4-store#middleware and https://redux.js.org/tutorials/fundamentals/part-6-async-logic#using-the-redux-thunk-middleware for examples.");
     if (typeof h.type > "u")
       throw new Error(process.env.NODE_ENV === "production" ? T(8) : 'Actions may not have an undefined "type" property. You may have misspelled an action type string constant.');
@@ -455,11 +455,11 @@ function Fe(t, e, r) {
     replaceReducer: f
   }, n[fe] = D, n;
 }
-const Yt = (t, e) => t === e;
-function Xt(t, e) {
+const Xt = (t, e) => t === e;
+function zt(t, e) {
   return !t && !e ? !0 : !t || !e ? !1 : t.x === e.x && t.y === e.y;
 }
-function zt(t, e, r = Yt) {
+function Qt(t, e, r = Xt) {
   if (t.length !== e.length)
     return !1;
   for (let n = 0; n < t.length; ++n)
@@ -467,7 +467,7 @@ function zt(t, e, r = Yt) {
       return !1;
   return !0;
 }
-function Qt(t, e, r) {
+function Kt(t, e, r) {
   return e in t ? Object.defineProperty(t, e, {
     value: r,
     enumerable: !0,
@@ -475,13 +475,13 @@ function Qt(t, e, r) {
     writable: !0
   }) : t[e] = r, t;
 }
-function Kt(t) {
+function Jt(t) {
   for (var e = 1; e < arguments.length; e++) {
     var r = arguments[e] != null ? arguments[e] : {}, n = Object.keys(r);
     typeof Object.getOwnPropertySymbols == "function" && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(i) {
       return Object.getOwnPropertyDescriptor(r, i).enumerable;
     }))), n.forEach(function(i) {
-      Qt(t, i, r[i]);
+      Kt(t, i, r[i]);
     });
   }
   return t;
@@ -491,7 +491,7 @@ const he = {
   initialClientOffset: null,
   clientOffset: null
 };
-function Jt(t = he, e) {
+function Zt(t = he, e) {
   const { payload: r } = e;
   switch (e.type) {
     case re:
@@ -502,7 +502,7 @@ function Jt(t = he, e) {
         clientOffset: r.clientOffset
       };
     case H:
-      return Xt(t.clientOffset, r.clientOffset) ? t : Kt({}, t, {
+      return zt(t.clientOffset, r.clientOffset) ? t : Jt({}, t, {
         clientOffset: r.clientOffset
       });
     case j:
@@ -513,7 +513,7 @@ function Jt(t = he, e) {
   }
 }
 const ie = "dnd-core/ADD_SOURCE", oe = "dnd-core/ADD_TARGET", se = "dnd-core/REMOVE_SOURCE", U = "dnd-core/REMOVE_TARGET";
-function Zt(t) {
+function er(t) {
   return {
     type: ie,
     payload: {
@@ -521,7 +521,7 @@ function Zt(t) {
     }
   };
 }
-function er(t) {
+function tr(t) {
   return {
     type: oe,
     payload: {
@@ -529,7 +529,7 @@ function er(t) {
     }
   };
 }
-function tr(t) {
+function rr(t) {
   return {
     type: se,
     payload: {
@@ -537,7 +537,7 @@ function tr(t) {
     }
   };
 }
-function rr(t) {
+function nr(t) {
   return {
     type: U,
     payload: {
@@ -545,7 +545,7 @@ function rr(t) {
     }
   };
 }
-function nr(t, e, r) {
+function ir(t, e, r) {
   return e in t ? Object.defineProperty(t, e, {
     value: r,
     enumerable: !0,
@@ -559,12 +559,12 @@ function C(t) {
     typeof Object.getOwnPropertySymbols == "function" && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(i) {
       return Object.getOwnPropertyDescriptor(r, i).enumerable;
     }))), n.forEach(function(i) {
-      nr(t, i, r[i]);
+      ir(t, i, r[i]);
     });
   }
   return t;
 }
-const ir = {
+const or = {
   itemType: null,
   item: null,
   sourceId: null,
@@ -573,7 +573,7 @@ const ir = {
   didDrop: !1,
   isSourcePublic: null
 };
-function or(t = ir, e) {
+function sr(t = or, e) {
   const { payload: r } = e;
   switch (e.type) {
     case L:
@@ -595,7 +595,7 @@ function or(t = ir, e) {
       });
     case U:
       return t.targetIds.indexOf(r.targetId) === -1 ? t : C({}, t, {
-        targetIds: vt(t.targetIds, r.targetId)
+        targetIds: mt(t.targetIds, r.targetId)
       });
     case $:
       return C({}, t, {
@@ -617,7 +617,7 @@ function or(t = ir, e) {
       return t;
   }
 }
-function sr(t = 0, e) {
+function ar(t = 0, e) {
   switch (e.type) {
     case ie:
     case oe:
@@ -632,10 +632,10 @@ function sr(t = 0, e) {
 const P = [], ae = [];
 P.__IS_NONE__ = !0;
 ae.__IS_ALL__ = !0;
-function ar(t, e) {
-  return t === P ? !1 : t === ae || typeof e > "u" ? !0 : yt(e, t).length > 0;
+function ur(t, e) {
+  return t === P ? !1 : t === ae || typeof e > "u" ? !0 : Dt(e, t).length > 0;
 }
-function ur(t = P, e) {
+function cr(t = P, e) {
   switch (e.type) {
     case H:
       break;
@@ -651,16 +651,16 @@ function ur(t = P, e) {
     default:
       return ae;
   }
-  const { targetIds: r = [], prevTargetIds: n = [] } = e.payload, i = mt(r, n);
-  if (!(i.length > 0 || !zt(r, n)))
+  const { targetIds: r = [], prevTargetIds: n = [] } = e.payload, i = yt(r, n);
+  if (!(i.length > 0 || !Qt(r, n)))
     return P;
   const s = n[n.length - 1], a = r[r.length - 1];
   return s !== a && (s && i.push(s), a && i.push(a)), i;
 }
-function cr(t = 0) {
+function lr(t = 0) {
   return t + 1;
 }
-function lr(t, e, r) {
+function dr(t, e, r) {
   return e in t ? Object.defineProperty(t, e, {
     value: r,
     enumerable: !0,
@@ -668,32 +668,32 @@ function lr(t, e, r) {
     writable: !0
   }) : t[e] = r, t;
 }
-function dr(t) {
+function fr(t) {
   for (var e = 1; e < arguments.length; e++) {
     var r = arguments[e] != null ? arguments[e] : {}, n = Object.keys(r);
     typeof Object.getOwnPropertySymbols == "function" && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(i) {
       return Object.getOwnPropertyDescriptor(r, i).enumerable;
     }))), n.forEach(function(i) {
-      lr(t, i, r[i]);
+      dr(t, i, r[i]);
     });
   }
   return t;
 }
-function fr(t = {}, e) {
+function gr(t = {}, e) {
   return {
-    dirtyHandlerIds: ur(t.dirtyHandlerIds, {
+    dirtyHandlerIds: cr(t.dirtyHandlerIds, {
       type: e.type,
-      payload: dr({}, e.payload, {
-        prevTargetIds: pt(t, "dragOperation.targetIds", [])
+      payload: fr({}, e.payload, {
+        prevTargetIds: vt(t, "dragOperation.targetIds", [])
       })
     }),
-    dragOffset: Jt(t.dragOffset, e),
-    refCount: sr(t.refCount, e),
-    dragOperation: or(t.dragOperation, e),
-    stateId: cr(t.stateId)
+    dragOffset: Zt(t.dragOffset, e),
+    refCount: ar(t.refCount, e),
+    dragOperation: sr(t.dragOperation, e),
+    stateId: lr(t.stateId)
   };
 }
-function gr(t, e) {
+function hr(t, e) {
   return {
     x: t.x + e.x,
     y: t.y + e.y
@@ -705,15 +705,15 @@ function Ve(t, e) {
     y: t.y - e.y
   };
 }
-function hr(t) {
-  const { clientOffset: e, initialClientOffset: r, initialSourceClientOffset: n } = t;
-  return !e || !r || !n ? null : Ve(gr(e, n), r);
-}
 function pr(t) {
+  const { clientOffset: e, initialClientOffset: r, initialSourceClientOffset: n } = t;
+  return !e || !r || !n ? null : Ve(hr(e, n), r);
+}
+function vr(t) {
   const { clientOffset: e, initialClientOffset: r } = t;
   return !e || !r ? null : Ve(e, r);
 }
-class vr {
+class mr {
   subscribeToStateChange(e, r = {}) {
     const { handlerIds: n } = r;
     d(typeof e == "function", "listener must be a function."), d(typeof n > "u" || Array.isArray(n), "handlerIds, when specified, must be an array of strings.");
@@ -721,7 +721,7 @@ class vr {
     const o = () => {
       const s = this.store.getState(), a = s.stateId;
       try {
-        a === i || a === i + 1 && !ar(s.dirtyHandlerIds, n) || e();
+        a === i || a === i + 1 && !ur(s.dirtyHandlerIds, n) || e();
       } finally {
         i = a;
       }
@@ -812,23 +812,23 @@ class vr {
     return this.store.getState().dragOffset.clientOffset;
   }
   getSourceClientOffset() {
-    return hr(this.store.getState().dragOffset);
+    return pr(this.store.getState().dragOffset);
   }
   getDifferenceFromInitialOffset() {
-    return pr(this.store.getState().dragOffset);
+    return vr(this.store.getState().dragOffset);
   }
   constructor(e, r) {
     this.store = e, this.registry = r;
   }
 }
-let mr = 0;
-function yr() {
-  return mr++;
-}
-function Dr(t) {
-  d(typeof t.canDrag == "function", "Expected canDrag to be a function."), d(typeof t.beginDrag == "function", "Expected beginDrag to be a function."), d(typeof t.endDrag == "function", "Expected endDrag to be a function.");
+let yr = 0;
+function Dr() {
+  return yr++;
 }
 function Or(t) {
+  d(typeof t.canDrag == "function", "Expected canDrag to be a function."), d(typeof t.beginDrag == "function", "Expected beginDrag to be a function."), d(typeof t.endDrag == "function", "Expected endDrag to be a function.");
+}
+function Sr(t) {
   d(typeof t.canDrop == "function", "Expected canDrop to be a function."), d(typeof t.hover == "function", "Expected hover to be a function."), d(typeof t.drop == "function", "Expected beginDrag to be a function.");
 }
 function K(t, e) {
@@ -849,7 +849,7 @@ function Be(t) {
     }
   };
 }
-function Sr(t) {
+function Tr(t) {
   let e = 1;
   const r = new qe(t), n = document.createTextNode("");
   return r.observe(n, {
@@ -858,7 +858,7 @@ function Sr(t) {
     e = -e, n.data = e;
   };
 }
-const Tr = typeof qe == "function" ? (
+const br = typeof qe == "function" ? (
   // reliably everywhere they are implemented.
   // They are implemented in all modern browsers.
   //
@@ -869,7 +869,7 @@ const Tr = typeof qe == "function" ? (
   // - iPad Safari 6-7.1
   // - iPhone Safari 7-7.1
   // - Safari 6-7
-  Sr
+  Tr
 ) : (
   // task queue, are implemented in Internet Explorer 10, Safari 5.0-1, and Opera
   // 11-12, and in web workers in many engines.
@@ -897,7 +897,7 @@ const Tr = typeof qe == "function" ? (
   // - Lynx 2.8.7
   Be
 );
-class br {
+class Ir {
   // Use the fastest means possible to execute a task in its own turn, with
   // priority over other events including IO, animation, reflow, and redraw
   // events in browsers.
@@ -926,13 +926,13 @@ class br {
       e.length = 0, this.index = 0, this.flushing = !1;
     }, this.registerPendingError = (e) => {
       this.pendingErrors.push(e), this.requestErrorThrow();
-    }, this.requestFlush = Tr(this.flush), this.requestErrorThrow = Be(() => {
+    }, this.requestFlush = br(this.flush), this.requestErrorThrow = Be(() => {
       if (this.pendingErrors.length)
         throw this.pendingErrors.shift();
     });
   }
 }
-class Ir {
+class Er {
   call() {
     try {
       this.task && this.task();
@@ -946,9 +946,9 @@ class Ir {
     this.onError = e, this.release = r, this.task = null;
   }
 }
-class Er {
+class wr {
   create(e) {
-    const r = this.freeTasks, n = r.length ? r.pop() : new Ir(
+    const r = this.freeTasks, n = r.length ? r.pop() : new Er(
       this.onError,
       (i) => r[r.length] = i
     );
@@ -958,12 +958,12 @@ class Er {
     this.onError = e, this.freeTasks = [];
   }
 }
-const Ge = new br(), wr = new Er(Ge.registerPendingError);
-function Cr(t) {
-  Ge.enqueueTask(wr.create(t));
-}
+const Ge = new Ir(), Cr = new wr(Ge.registerPendingError);
 function _r(t) {
-  const e = yr().toString();
+  Ge.enqueueTask(Cr.create(t));
+}
+function Nr(t) {
+  const e = Dr().toString();
   switch (t) {
     case b.SOURCE:
       return `S${e}`;
@@ -994,16 +994,16 @@ function me(t, e) {
   } while (!n);
   return !1;
 }
-class Nr {
+class Pr {
   addSource(e, r) {
-    K(e), Dr(r);
+    K(e), Or(r);
     const n = this.addHandler(b.SOURCE, e, r);
-    return this.store.dispatch(Zt(n)), n;
+    return this.store.dispatch(er(n)), n;
   }
   addTarget(e, r) {
-    K(e, !0), Or(r);
+    K(e, !0), Sr(r);
     const n = this.addHandler(b.TARGET, e, r);
-    return this.store.dispatch(er(n)), n;
+    return this.store.dispatch(tr(n)), n;
   }
   containsHandler(e) {
     return me(this.dragSources, e) || me(this.dropTargets, e);
@@ -1027,12 +1027,12 @@ class Nr {
     return ve(e) === b.TARGET;
   }
   removeSource(e) {
-    d(this.getSource(e), "Expected an existing source."), this.store.dispatch(tr(e)), Cr(() => {
+    d(this.getSource(e), "Expected an existing source."), this.store.dispatch(rr(e)), _r(() => {
       this.dragSources.delete(e), this.types.delete(e);
     });
   }
   removeTarget(e) {
-    d(this.getTarget(e), "Expected an existing target."), this.store.dispatch(rr(e)), this.dropTargets.delete(e), this.types.delete(e);
+    d(this.getTarget(e), "Expected an existing target."), this.store.dispatch(nr(e)), this.dropTargets.delete(e), this.types.delete(e);
   }
   pinSource(e) {
     const r = this.getSource(e);
@@ -1042,20 +1042,20 @@ class Nr {
     d(this.pinnedSource, "No source is pinned at the time."), this.pinnedSourceId = null, this.pinnedSource = null;
   }
   addHandler(e, r, n) {
-    const i = _r(e);
+    const i = Nr(e);
     return this.types.set(i, r), e === b.SOURCE ? this.dragSources.set(i, n) : e === b.TARGET && this.dropTargets.set(i, n), i;
   }
   constructor(e) {
     this.types = /* @__PURE__ */ new Map(), this.dragSources = /* @__PURE__ */ new Map(), this.dropTargets = /* @__PURE__ */ new Map(), this.pinnedSourceId = null, this.pinnedSource = null, this.store = e;
   }
 }
-function Pr(t, e = void 0, r = {}, n = !1) {
-  const i = xr(n), o = new vr(i, new Nr(i)), s = new Ft(i, o), a = t(s, e, r);
+function xr(t, e = void 0, r = {}, n = !1) {
+  const i = Rr(n), o = new mr(i, new Pr(i)), s = new Vt(i, o), a = t(s, e, r);
   return s.receiveBackend(a), s;
 }
-function xr(t) {
+function Rr(t) {
   const e = typeof window < "u" && window.__REDUX_DEVTOOLS_EXTENSION__;
-  return Fe(fr, t && e && e({
+  return Fe(gr, t && e && e({
     name: "dnd-core",
     instanceId: "dnd-core"
   }));
@@ -1066,11 +1066,11 @@ function ye(t, e) {
     n[r] = t[r];
   return n;
 }
-function Rr(t) {
+function Ar(t) {
   if (Array.isArray(t))
     return t;
 }
-function Ar(t, e) {
+function Mr(t, e) {
   var r = t == null ? null : typeof Symbol < "u" && t[Symbol.iterator] || t["@@iterator"];
   if (r != null) {
     var n = [], i = !0, o = !1, s, a;
@@ -1090,13 +1090,13 @@ function Ar(t, e) {
     return n;
   }
 }
-function Mr() {
+function kr() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function kr(t, e) {
-  return Rr(t) || Ar(t, e) || Lr(t, e) || Mr();
-}
 function Lr(t, e) {
+  return Ar(t) || Mr(t, e) || Hr(t, e) || kr();
+}
+function Hr(t, e) {
   if (t) {
     if (typeof t == "string")
       return ye(t, e);
@@ -1108,31 +1108,31 @@ function Lr(t, e) {
   }
 }
 var De = 0, A = Symbol.for("__VUE_DND_CONTEXT_INSTANCE__");
-function Hr(t) {
+function $r(t) {
   return "manager" in t && t.manager;
 }
-function $r(t) {
-  if (Hr(t)) {
+function jr(t) {
+  if ($r(t)) {
     var e = t.manager;
     return [
       e,
       !1
     ];
   }
-  var r = jr(t.backend, t.context, t.options, t.debugMode), n = !t.context;
+  var r = Ur(t.backend, t.context, t.options, t.debugMode), n = !t.context;
   return [
     r,
     n
   ];
 }
-function jr(t) {
+function Ur(t) {
   var e = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : We(), r = arguments.length > 2 ? arguments[2] : void 0, n = arguments.length > 3 ? arguments[3] : void 0, i = e;
-  return i[A] || (i[A] = Pr(t, e, r, n)), i[A];
+  return i[A] || (i[A] = xr(t, e, r, n)), i[A];
 }
 function We() {
   return typeof globalThis < "u" ? globalThis : typeof global < "u" ? global : window;
 }
-const Ur = x({
+const Fr = x({
   name: "DndProvider",
   props: {
     manager: {
@@ -1152,13 +1152,13 @@ const Ur = x({
     }
   },
   setup: function(e, r) {
-    var n = r.slots, i = kr($r(e), 2), o = i[0], s = i[1];
-    s && ++De, at(function() {
+    var n = r.slots, i = Lr(jr(e), 2), o = i[0], s = i[1];
+    s && ++De, ut(function() {
       if (s) {
         var u = We();
         --De === 0 && (u[A] = null);
       }
-    }), ft(o);
+    }), gt(o);
     var a;
     return function() {
       var u;
@@ -1192,13 +1192,13 @@ x({
     };
   }
 });
-function Fr(t, e) {
+function Vr(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
-var q = !1, B = !1, Vr = /* @__PURE__ */ function() {
+var q = !1, B = !1, qr = /* @__PURE__ */ function() {
   function t(r) {
-    Fr(this, t), this.sourceId = null, this.internalMonitor = r.getMonitor();
+    Vr(this, t), this.sourceId = null, this.internalMonitor = r.getMonitor();
   }
   var e = t.prototype;
   return e.receiveHandlerId = function(n) {
@@ -1259,13 +1259,13 @@ var q = !1, B = !1, Vr = /* @__PURE__ */ function() {
     return this.internalMonitor.getDifferenceFromInitialOffset();
   }, t;
 }();
-function qr(t, e) {
+function Br(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
-var G = !1, Br = /* @__PURE__ */ function() {
+var G = !1, Gr = /* @__PURE__ */ function() {
   function t(r) {
-    qr(this, t), this.targetId = null, this.internalMonitor = r.getMonitor();
+    Br(this, t), this.targetId = null, this.internalMonitor = r.getMonitor();
   }
   var e = t.prototype;
   return e.receiveHandlerId = function(n) {
@@ -1304,25 +1304,25 @@ var G = !1, Br = /* @__PURE__ */ function() {
   }, e.getDifferenceFromInitialOffset = function() {
     return this.internalMonitor.getDifferenceFromInitialOffset();
   }, t;
-}(), Gr = function(t) {
+}(), Wr = function(t) {
   return t && typeof Symbol < "u" && t.constructor === Symbol ? "symbol" : typeof t;
 };
-function Wr(t) {
+function Yr(t) {
   return t ? t.__v_isVNode === !0 : !1;
 }
-function Yr(t) {
+function Xr(t) {
   return t ? t.__v_skip : !1;
 }
-function Xr(t) {
-  return Wr(t) && Gr(t.type) !== "symbol";
+function zr(t) {
+  return Yr(t) && Wr(t.type) !== "symbol";
 }
-function zr() {
+function Qr() {
   throw new Error("Only native element nodes can now be passed to Vue DnD connectors.You can either wrap Component into a <div>, or turn it into a drag source or a drop target itself.");
 }
-function Qr(t) {
+function Kr(t) {
   return function() {
     var e = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : null, r = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : null;
-    if (Yr(e) && zr(), !Xr(e)) {
+    if (Xr(e) && Qr(), !zr(e)) {
       var n = e;
       return t(n, r), n;
     }
@@ -1335,7 +1335,7 @@ function Ye(t) {
     if (r.endsWith("Ref"))
       e[r] = t[r];
     else {
-      var i = Qr(n);
+      var i = Kr(n);
       e[r] = function() {
         return i;
       };
@@ -1364,7 +1364,7 @@ function J(t, e, r, n) {
   }
   return !0;
 }
-function Kr(t, e) {
+function Jr(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
@@ -1374,13 +1374,13 @@ function Oe(t, e) {
     n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(t, n.key, n);
   }
 }
-function Jr(t, e, r) {
+function Zr(t, e, r) {
   return e && Oe(t.prototype, e), r && Oe(t, r), t;
 }
-var Zr = /* @__PURE__ */ function() {
+var en = /* @__PURE__ */ function() {
   function t(r) {
     var n = this;
-    Kr(this, t), this.hooks = Ye({
+    Jr(this, t), this.hooks = Ye({
       dragSource: function(i, o) {
         n.clearDragSource(), n.dragSourceOptions = o || null, n.dragSourceNode = i, n.reconnectDragSource();
       },
@@ -1425,7 +1425,7 @@ var Zr = /* @__PURE__ */ function() {
     this.dragSourceNode = null;
   }, e.clearDragPreview = function() {
     this.dragPreviewNode = null;
-  }, Jr(t, [
+  }, Zr(t, [
     {
       key: "connectTarget",
       get: function() {
@@ -1464,7 +1464,7 @@ var Zr = /* @__PURE__ */ function() {
     }
   ]), t;
 }();
-function en(t, e) {
+function tn(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
@@ -1474,13 +1474,13 @@ function Se(t, e) {
     n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(t, n.key, n);
   }
 }
-function tn(t, e, r) {
+function rn(t, e, r) {
   return e && Se(t.prototype, e), r && Se(t, r), t;
 }
-var rn = /* @__PURE__ */ function() {
+var nn = /* @__PURE__ */ function() {
   function t(r) {
     var n = this;
-    en(this, t), this.hooks = Ye({
+    tn(this, t), this.hooks = Ye({
       dropTarget: function(i, o) {
         n.clearDropTarget(), n.dropTargetOptions = o, Le(i) ? n.dropTargetRef = i : n.dropTargetNode = i, n.reconnect();
       }
@@ -1510,7 +1510,7 @@ var rn = /* @__PURE__ */ function() {
     this.unsubscribeDropTarget && (this.unsubscribeDropTarget(), this.unsubscribeDropTarget = void 0);
   }, e.clearDropTarget = function() {
     this.dropTargetRef = null, this.dropTargetNode = null;
-  }, tn(t, [
+  }, rn(t, [
     {
       key: "connectTarget",
       get: function() {
@@ -1534,7 +1534,7 @@ var rn = /* @__PURE__ */ function() {
     }
   ]), t;
 }();
-function nn(t, e, r) {
+function on(t, e, r) {
   var n = c(r).getRegistry(), i = n.addTarget(c(t), c(e));
   return [
     i,
@@ -1543,7 +1543,7 @@ function nn(t, e, r) {
     }
   ];
 }
-function on(t, e, r) {
+function sn(t, e, r) {
   var n = r.getRegistry(), i = n.addSource(t, e);
   return [
     i,
@@ -1552,13 +1552,13 @@ function on(t, e, r) {
     }
   ];
 }
-function sn(t, e) {
+function an(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
-var an = /* @__PURE__ */ function() {
+var un = /* @__PURE__ */ function() {
   function t(r, n, i) {
-    sn(this, t), this.spec = r, this.monitor = n, this.connector = i;
+    an(this, t), this.spec = r, this.monitor = n, this.connector = i;
   }
   var e = t.prototype;
   return e.beginDrag = function() {
@@ -1575,19 +1575,19 @@ var an = /* @__PURE__ */ function() {
     s && s(i.getItem(), i), o.reconnect();
   }, t;
 }();
-function un(t, e, r) {
+function cn(t, e, r) {
   var n = m(function() {
-    return new an(c(t), c(e), c(r));
+    return new un(c(t), c(e), c(r));
   });
   return I(function() {
     n.value.spec = c(t);
   }), n;
 }
 function _() {
-  var t = gt();
+  var t = ht();
   return d(t != null, "Expected drag drop context"), t;
 }
-function cn(t) {
+function ln(t) {
   return m(function() {
     var e = c(t).type;
     return d(e != null, "spec.type must be defined"), e;
@@ -1599,11 +1599,11 @@ function Te(t, e) {
     n[r] = t[r];
   return n;
 }
-function ln(t) {
+function dn(t) {
   if (Array.isArray(t))
     return t;
 }
-function dn(t, e) {
+function fn(t, e) {
   var r = t == null ? null : typeof Symbol < "u" && t[Symbol.iterator] || t["@@iterator"];
   if (r != null) {
     var n = [], i = !0, o = !1, s, a;
@@ -1623,13 +1623,13 @@ function dn(t, e) {
     return n;
   }
 }
-function fn() {
+function gn() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function gn(t, e) {
-  return ln(t) || dn(t, e) || hn(t, e) || fn();
-}
 function hn(t, e) {
+  return dn(t) || fn(t, e) || pn(t, e) || gn();
+}
+function pn(t, e) {
   if (t) {
     if (typeof t == "string")
       return Te(t, e);
@@ -1640,11 +1640,11 @@ function hn(t, e) {
       return Te(t, e);
   }
 }
-function pn(t, e, r) {
-  var n = _(), i = un(t, e, r), o = cn(t);
+function vn(t, e, r) {
+  var n = _(), i = cn(t, e, r), o = ln(t);
   I(function(a) {
     if (c(o) != null) {
-      var u = gn(on(c(o), c(i), c(n)), 2), l = u[0], g = u[1];
+      var u = hn(sn(c(o), c(i), c(n)), 2), l = u[0], g = u[1];
       c(e).receiveHandlerId(l), c(r).receiveHandlerId(l), a(g);
     }
   });
@@ -1654,15 +1654,15 @@ function Xe(t) {
     return typeof t == "function" ? t() : t;
   });
 }
-function vn() {
+function mn() {
   var t = _();
   return m(function() {
-    return new Vr(c(t));
+    return new qr(c(t));
   });
 }
-function mn(t, e) {
+function yn(t, e) {
   var r = _(), n = m(function() {
-    return new Zr(c(r).getBackend());
+    return new en(c(r).getBackend());
   });
   return I(function(i) {
     n.value.dragSourceOptions = c(t) || null, c(n).reconnect(), i(function() {
@@ -1709,7 +1709,7 @@ var ze = function t(e, r) {
   }
   return e !== e && r !== r;
 };
-function yn(t, e, r) {
+function Dn(t, e, r) {
   var n = ee(c(e)(c(t))), i = function() {
     var o = c(e)(c(t));
     ze(n, o) || (n.value = o, r && r());
@@ -1725,11 +1725,11 @@ function be(t, e) {
     n[r] = t[r];
   return n;
 }
-function Dn(t) {
+function On(t) {
   if (Array.isArray(t))
     return t;
 }
-function On(t, e) {
+function Sn(t, e) {
   var r = t == null ? null : typeof Symbol < "u" && t[Symbol.iterator] || t["@@iterator"];
   if (r != null) {
     var n = [], i = !0, o = !1, s, a;
@@ -1749,13 +1749,13 @@ function On(t, e) {
     return n;
   }
 }
-function Sn() {
+function Tn() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function Tn(t, e) {
-  return Dn(t) || On(t, e) || bn(t, e) || Sn();
-}
 function bn(t, e) {
+  return On(t) || Sn(t, e) || In(t, e) || Tn();
+}
+function In(t, e) {
   if (t) {
     if (typeof t == "string")
       return be(t, e);
@@ -1766,8 +1766,8 @@ function bn(t, e) {
       return be(t, e);
   }
 }
-function In(t, e, r) {
-  var n = Tn(yn(t, e, r), 2), i = n[0], o = n[1];
+function En(t, e, r) {
+  var n = bn(Dn(t, e, r), 2), i = n[0], o = n[1];
   return I(function(a) {
     var u = c(t).getHandlerId();
     u != null && a(c(t).subscribeToStateChange(o, {
@@ -1781,12 +1781,12 @@ function Qe(t, e, r) {
   var n = function() {
     return {};
   };
-  return In(e, t || n, function() {
+  return En(e, t || n, function() {
     return c(r).reconnect();
   });
 }
 function ue(t, e) {
-  var r = ut({
+  var r = ct({
     el: null,
     options: c(e)
   });
@@ -1802,37 +1802,37 @@ function ue(t, e) {
   };
   return n;
 }
-function En(t, e) {
+function wn(t, e) {
   return ue(function(r) {
     c(t).hooks.dragSource()(r.el, r.options);
   }, m(function() {
     return c(e).options;
   }));
 }
-function wn(t, e) {
+function Cn(t, e) {
   return ue(function(r) {
     c(t).hooks.dragPreview()(r.el, r.options);
   }, m(function() {
     return c(e).previewOptions;
   }));
 }
-function Cn(t) {
-  var e = Xe(t), r = vn(), n = mn(m(function() {
+function _n(t) {
+  var e = Xe(t), r = mn(), n = yn(m(function() {
     return c(e).options;
   }), m(function() {
     return c(e).previewOptions;
   }));
-  return pn(e, r, n), [
+  return vn(e, r, n), [
     Qe(m(function() {
       return c(e).collect || function() {
         return {};
       };
     }), r, n),
-    En(n, e),
-    wn(n, e)
+    wn(n, e),
+    Cn(n, e)
   ];
 }
-function _n(t) {
+function Nn(t) {
   return m(function() {
     var e = c(t).accept;
     return d(e != null, "accept must be defined"), Array.isArray(e) ? e : [
@@ -1840,13 +1840,13 @@ function _n(t) {
     ];
   });
 }
-function Nn(t, e) {
+function Pn(t, e) {
   if (!(t instanceof e))
     throw new TypeError("Cannot call a class as a function");
 }
-var Pn = /* @__PURE__ */ function() {
+var xn = /* @__PURE__ */ function() {
   function t(r, n) {
-    Nn(this, t), this.spec = r, this.monitor = n;
+    Pn(this, t), this.spec = r, this.monitor = n;
   }
   var e = t.prototype;
   return e.canDrop = function() {
@@ -1861,9 +1861,9 @@ var Pn = /* @__PURE__ */ function() {
       return n.drop(i.getItem(), i);
   }, t;
 }();
-function xn(t, e) {
+function Rn(t, e) {
   var r = m(function() {
-    return new Pn(c(t), c(e));
+    return new xn(c(t), c(e));
   });
   return I(function() {
     r.value.spec = c(t);
@@ -1875,11 +1875,11 @@ function Ie(t, e) {
     n[r] = t[r];
   return n;
 }
-function Rn(t) {
+function An(t) {
   if (Array.isArray(t))
     return t;
 }
-function An(t, e) {
+function Mn(t, e) {
   var r = t == null ? null : typeof Symbol < "u" && t[Symbol.iterator] || t["@@iterator"];
   if (r != null) {
     var n = [], i = !0, o = !1, s, a;
@@ -1899,13 +1899,13 @@ function An(t, e) {
     return n;
   }
 }
-function Mn() {
+function kn() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function kn(t, e) {
-  return Rn(t) || An(t, e) || Ln(t, e) || Mn();
-}
 function Ln(t, e) {
+  return An(t) || Mn(t, e) || Hn(t, e) || kn();
+}
+function Hn(t, e) {
   if (t) {
     if (typeof t == "string")
       return Ie(t, e);
@@ -1916,22 +1916,22 @@ function Ln(t, e) {
       return Ie(t, e);
   }
 }
-function Hn(t, e, r) {
-  var n = _(), i = xn(t, e), o = _n(t);
+function $n(t, e, r) {
+  var n = _(), i = Rn(t, e), o = Nn(t);
   I(function(a) {
-    var u = kn(nn(o, i, n), 2), l = u[0], g = u[1];
+    var u = Ln(on(o, i, n), 2), l = u[0], g = u[1];
     c(e).receiveHandlerId(l), c(r).receiveHandlerId(l), a(g);
   });
 }
-function $n() {
+function jn() {
   var t = _();
   return m(function() {
-    return new Br(c(t));
+    return new Gr(c(t));
   });
 }
-function jn(t) {
+function Un(t) {
   var e = _(), r = m(function() {
-    return new rn(c(e).getBackend());
+    return new nn(c(e).getBackend());
   });
   return I(function(n) {
     r.value.dropTargetOptions = c(t) || null, r.value.reconnect(), n(function() {
@@ -1939,36 +1939,36 @@ function jn(t) {
     });
   }), r;
 }
-function Un(t, e) {
+function Fn(t, e) {
   return ue(function(r) {
     c(t).hooks.dropTarget()(r.el, r.options);
   }, m(function() {
     return c(e).options;
   }));
 }
-function Fn(t) {
-  var e = Xe(t), r = $n(), n = jn(m(function() {
+function Vn(t) {
+  var e = Xe(t), r = jn(), n = Un(m(function() {
     return c(e).options;
   }));
-  return Hn(e, r, n), [
+  return $n(e, r, n), [
     Qe(m(function() {
       return c(e).collect || function() {
         return {};
       };
     }), r, n),
-    Un(n, e)
+    Fn(n, e)
   ];
 }
 function Ke(t) {
   let e = null;
   return () => (e == null && (e = t()), e);
 }
-function Vn(t, e) {
+function qn(t, e) {
   return t.filter(
     (r) => r !== e
   );
 }
-function qn(t, e) {
+function Bn(t, e) {
   const r = /* @__PURE__ */ new Set(), n = (o) => r.add(o);
   t.forEach(n), e.forEach(n);
   const i = [];
@@ -1976,16 +1976,16 @@ function qn(t, e) {
     (o) => i.push(o)
   ), i;
 }
-class Bn {
+class Gn {
   enter(e) {
     const r = this.entered.length, n = (i) => this.isNodeInDocument(i) && (!i.contains || i.contains(e));
-    return this.entered = qn(this.entered.filter(n), [
+    return this.entered = Bn(this.entered.filter(n), [
       e
     ]), r === 0 && this.entered.length > 0;
   }
   leave(e) {
     const r = this.entered.length;
-    return this.entered = Vn(this.entered.filter(this.isNodeInDocument), e), r > 0 && this.entered.length === 0;
+    return this.entered = qn(this.entered.filter(this.isNodeInDocument), e), r > 0 && this.entered.length === 0;
   }
   reset() {
     this.entered = [];
@@ -1994,7 +1994,7 @@ class Bn {
     this.entered = [], this.isNodeInDocument = e;
   }
 }
-class Gn {
+class Wn {
   initializeExposedProperties() {
     Object.keys(this.config.exposeProperties).forEach((e) => {
       Object.defineProperty(this.item, e, {
@@ -2091,11 +2091,11 @@ const Z = {
     ]
   }
 };
-function Wn(t, e) {
+function Yn(t, e) {
   const r = Z[t];
   if (!r)
     throw new Error(`native type ${t} has no configuration`);
-  const n = new Gn(r);
+  const n = new Wn(r);
   return n.loadDataTransfer(e), n;
 }
 function Y(t) {
@@ -2109,7 +2109,7 @@ function Y(t) {
     ) : !1;
   })[0] || null;
 }
-const Yn = Ke(
+const Xn = Ke(
   () => /firefox/i.test(navigator.userAgent)
 ), rt = Ke(
   () => !!window.safari
@@ -2170,9 +2170,9 @@ class we {
     this.xs = e, this.ys = r, this.c1s = l, this.c2s = g, this.c3s = v;
   }
 }
-const Xn = 1;
+const zn = 1;
 function nt(t) {
-  const e = t.nodeType === Xn ? t : t.parentElement;
+  const e = t.nodeType === zn ? t : t.parentElement;
   if (!e)
     return null;
   const { top: r, left: n } = e.getBoundingClientRect();
@@ -2187,22 +2187,22 @@ function R(t) {
     y: t.clientY
   };
 }
-function zn(t) {
+function Qn(t) {
   var e;
-  return t.nodeName === "IMG" && (Yn() || !(!((e = document.documentElement) === null || e === void 0) && e.contains(t)));
+  return t.nodeName === "IMG" && (Xn() || !(!((e = document.documentElement) === null || e === void 0) && e.contains(t)));
 }
-function Qn(t, e, r, n) {
+function Kn(t, e, r, n) {
   let i = t ? e.width : r, o = t ? e.height : n;
   return rt() && t && (o /= window.devicePixelRatio, i /= window.devicePixelRatio), {
     dragPreviewWidth: i,
     dragPreviewHeight: o
   };
 }
-function Kn(t, e, r, n, i) {
-  const o = zn(e), a = nt(o ? t : e), u = {
+function Jn(t, e, r, n, i) {
+  const o = Qn(e), a = nt(o ? t : e), u = {
     x: r.x - a.x,
     y: r.y - a.y
-  }, { offsetWidth: l, offsetHeight: g } = t, { anchorX: v, anchorY: p } = n, { dragPreviewWidth: f, dragPreviewHeight: D } = Qn(o, e, l, g), h = () => {
+  }, { offsetWidth: l, offsetHeight: g } = t, { anchorX: v, anchorY: p } = n, { dragPreviewWidth: f, dragPreviewHeight: D } = Kn(o, e, l, g), h = () => {
     let ce = new we([
       0,
       0.5,
@@ -2233,7 +2233,7 @@ function Kn(t, e, r, n, i) {
     y: F ? S : h()
   };
 }
-class Jn {
+class Zn {
   get window() {
     if (this.globalContext)
       return this.globalContext;
@@ -2252,7 +2252,7 @@ class Jn {
     this.ownerDocument = null, this.globalContext = e, this.optionsArgs = r;
   }
 }
-function Zn(t, e, r) {
+function ei(t, e, r) {
   return e in t ? Object.defineProperty(t, e, {
     value: r,
     enumerable: !0,
@@ -2266,12 +2266,12 @@ function Ce(t) {
     typeof Object.getOwnPropertySymbols == "function" && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(i) {
       return Object.getOwnPropertyDescriptor(r, i).enumerable;
     }))), n.forEach(function(i) {
-      Zn(t, i, r[i]);
+      ei(t, i, r[i]);
     });
   }
   return t;
 }
-class ei {
+class ti {
   /**
   * Generate profiling statistics for the HTML5Backend.
   */
@@ -2364,7 +2364,7 @@ class ei {
     );
   }
   beginDragNativeItem(e, r) {
-    this.clearCurrentDragSourceNode(), this.currentNativeSource = Wn(e, r), this.currentNativeHandle = this.registry.addSource(e, this.currentNativeSource), this.actions.beginDrag([
+    this.clearCurrentDragSourceNode(), this.currentNativeSource = Yn(e, r), this.currentNativeHandle = this.registry.addSource(e, this.currentNativeSource), this.actions.beginDrag([
       this.currentNativeHandle
     ]);
   }
@@ -2433,7 +2433,7 @@ class ei {
         if (a && typeof a.setDragImage == "function") {
           const g = this.monitor.getSourceId(), v = this.sourceNodes.get(g), p = this.sourcePreviewNodes.get(g) || v;
           if (p) {
-            const { anchorX: f, anchorY: D, offsetX: h, offsetY: y } = this.getCurrentSourcePreviewNodeOptions(), E = Kn(v, p, s, {
+            const { anchorX: f, anchorY: D, offsetX: h, offsetY: y } = this.getCurrentSourcePreviewNodeOptions(), E = Jn(v, p, s, {
               anchorX: f,
               anchorY: D
             }, {
@@ -2516,15 +2516,15 @@ class ei {
     }, this.handleSelectStart = (i) => {
       const o = i.target;
       typeof o.dragDrop == "function" && (o.tagName === "INPUT" || o.tagName === "SELECT" || o.tagName === "TEXTAREA" || o.isContentEditable || (i.preventDefault(), o.dragDrop()));
-    }, this.options = new Jn(r, n), this.actions = e.getActions(), this.monitor = e.getMonitor(), this.registry = e.getRegistry(), this.enterLeaveCounter = new Bn(this.isNodeInDocument);
+    }, this.options = new Zn(r, n), this.actions = e.getActions(), this.monitor = e.getMonitor(), this.registry = e.getRegistry(), this.enterLeaveCounter = new Gn(this.isNodeInDocument);
   }
 }
-const ti = function(e, r, n) {
-  return new ei(e, r, n);
+const ri = function(e, r, n) {
+  return new ti(e, r, n);
 }, M = /* @__PURE__ */ x({
   __name: "DndProvider",
   setup(t) {
-    return (e, r) => (N(), X(c(Ur), { backend: c(ti) }, {
+    return (e, r) => (N(), X(c(Fr), { backend: c(ri) }, {
       default: z(() => [
         te(e.$slots, "default")
       ]),
@@ -2535,7 +2535,7 @@ const ti = function(e, r, n) {
 M.install = (t) => {
   t.component(M.__name, M);
 };
-const ri = /* @__PURE__ */ x({
+const ni = /* @__PURE__ */ x({
   __name: "DraggableItem",
   props: {
     index: null,
@@ -2543,7 +2543,7 @@ const ri = /* @__PURE__ */ x({
     move: null
   },
   setup(t) {
-    const e = t, [, r] = Cn(() => ({
+    const e = t, [, r] = _n(() => ({
       type: "drag",
       canDrag: !0,
       item: () => ({ index: e.index, data: e.data }),
@@ -2551,7 +2551,7 @@ const ri = /* @__PURE__ */ x({
         isDragging: s.isDragging(),
         handlerId: s.getHandlerId()
       })
-    })), [, n] = Fn(() => ({
+    })), [, n] = Vn(() => ({
       accept: ["drag"],
       hover: (s, a) => {
         var p;
@@ -2572,41 +2572,48 @@ const ri = /* @__PURE__ */ x({
         console.log("index", s, a);
       }
     ), (s, a) => (N(), $e("div", {
+      class: "draggable-item",
       ref: o,
       key: t.index
     }, [
-      te(s.$slots, "default")
+      te(s.$slots, "default", {}, void 0, !0)
     ]));
   }
 });
+const it = (t, e) => {
+  const r = t.__vccOpts || t;
+  for (const [n, i] of e)
+    r[n] = i;
+  return r;
+}, ii = /* @__PURE__ */ it(ni, [["__scopeId", "data-v-7f0ba3c1"]]);
 var _e;
-const ni = typeof window < "u";
-ni && ((_e = window == null ? void 0 : window.navigator) != null && _e.userAgent) && /iP(ad|hone|od)/.test(window.navigator.userAgent);
-function ii(t) {
+const oi = typeof window < "u";
+oi && ((_e = window == null ? void 0 : window.navigator) != null && _e.userAgent) && /iP(ad|hone|od)/.test(window.navigator.userAgent);
+function si(t) {
   return t;
 }
-var oi = Object.defineProperty, si = Object.defineProperties, ai = Object.getOwnPropertyDescriptors, Ne = Object.getOwnPropertySymbols, ui = Object.prototype.hasOwnProperty, ci = Object.prototype.propertyIsEnumerable, Pe = (t, e, r) => e in t ? oi(t, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : t[e] = r, li = (t, e) => {
+var ai = Object.defineProperty, ui = Object.defineProperties, ci = Object.getOwnPropertyDescriptors, Ne = Object.getOwnPropertySymbols, li = Object.prototype.hasOwnProperty, di = Object.prototype.propertyIsEnumerable, Pe = (t, e, r) => e in t ? ai(t, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : t[e] = r, fi = (t, e) => {
   for (var r in e || (e = {}))
-    ui.call(e, r) && Pe(t, r, e[r]);
+    li.call(e, r) && Pe(t, r, e[r]);
   if (Ne)
     for (var r of Ne(e))
-      ci.call(e, r) && Pe(t, r, e[r]);
+      di.call(e, r) && Pe(t, r, e[r]);
   return t;
-}, di = (t, e) => si(t, ai(e));
-function fi(t) {
+}, gi = (t, e) => ui(t, ci(e));
+function hi(t) {
   return JSON.parse(JSON.stringify(t));
 }
-function gi(t, e = {}) {
+function pi(t, e = {}) {
   const r = ee({}), {
     manual: n,
-    clone: i = fi,
+    clone: i = hi,
     deep: o = !0,
     immediate: s = !0
   } = e;
   function a() {
     r.value = i(c(t));
   }
-  return !n && Le(t) ? He(t, a, di(li({}, e), {
+  return !n && Le(t) ? He(t, a, gi(fi({}, e), {
     deep: o,
     immediate: s
   })) : a(), { cloned: r, sync: a };
@@ -2617,15 +2624,15 @@ var Ae;
 (function(t) {
   t.UP = "UP", t.RIGHT = "RIGHT", t.DOWN = "DOWN", t.LEFT = "LEFT", t.NONE = "NONE";
 })(Ae || (Ae = {}));
-var hi = Object.defineProperty, Me = Object.getOwnPropertySymbols, pi = Object.prototype.hasOwnProperty, vi = Object.prototype.propertyIsEnumerable, ke = (t, e, r) => e in t ? hi(t, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : t[e] = r, mi = (t, e) => {
+var vi = Object.defineProperty, Me = Object.getOwnPropertySymbols, mi = Object.prototype.hasOwnProperty, yi = Object.prototype.propertyIsEnumerable, ke = (t, e, r) => e in t ? vi(t, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : t[e] = r, Di = (t, e) => {
   for (var r in e || (e = {}))
-    pi.call(e, r) && ke(t, r, e[r]);
+    mi.call(e, r) && ke(t, r, e[r]);
   if (Me)
     for (var r of Me(e))
-      vi.call(e, r) && ke(t, r, e[r]);
+      yi.call(e, r) && ke(t, r, e[r]);
   return t;
 };
-const yi = {
+const Oi = {
   easeInSine: [0.12, 0, 0.39, 0],
   easeOutSine: [0.61, 1, 0.88, 1],
   easeInOutSine: [0.37, 0, 0.63, 1],
@@ -2651,10 +2658,10 @@ const yi = {
   easeOutBack: [0.34, 1.56, 0.64, 1],
   easeInOutBack: [0.68, -0.6, 0.32, 1.6]
 };
-mi({
-  linear: ii
-}, yi);
-const Di = /* @__PURE__ */ x({
+Di({
+  linear: si
+}, Oi);
+const Si = /* @__PURE__ */ x({
   __name: "Draggable",
   props: {
     name: { default: "drag" },
@@ -2665,7 +2672,7 @@ const Di = /* @__PURE__ */ x({
   setup(t, { emit: e }) {
     const r = t, n = m({
       get() {
-        return gi(r.list).cloned.value;
+        return pi(r.list).cloned.value;
       },
       set(o) {
         console.log("dragList", o), e("update:list", o);
@@ -2675,13 +2682,13 @@ const Di = /* @__PURE__ */ x({
       n.value.splice(o, 1), n.value.splice(s, 0, u);
     };
     return (o, s) => {
-      const a = ri;
-      return N(), X(ct, {
+      const a = ii;
+      return N(), X(lt, {
         name: "list",
         tag: "div"
       }, {
         default: z(() => [
-          (N(!0), $e(lt, null, dt(c(n), (u, l) => (N(), X(a, {
+          (N(!0), $e(dt, null, ft(c(n), (u, l) => (N(), X(a, {
             key: t.itemKey ? u[t.itemKey] : u,
             move: i,
             index: l,
@@ -2701,23 +2708,19 @@ const Di = /* @__PURE__ */ x({
     };
   }
 });
-const Oi = (t, e) => {
-  const r = t.__vccOpts || t;
-  for (const [n, i] of e)
-    r[n] = i;
-  return r;
-}, k = /* @__PURE__ */ Oi(Di, [["__scopeId", "data-v-a12ad917"]]);
+const k = /* @__PURE__ */ it(Si, [["__scopeId", "data-v-0f94fc06"]]);
 k.install = (t) => {
   t.component(k.__name, k);
 };
-const Si = [k, M], Ti = (t) => {
-  Si.forEach((e) => {
+const Ti = [k, M], bi = (t) => {
+  Ti.forEach((e) => {
     t.component(e.__name, e);
   });
-}, Ii = {
-  install: Ti
+}, Ei = {
+  install: bi
 };
 export {
-  Ii as default,
+  M as DndProvider,
+  Ei as default,
   k as draggable
 };

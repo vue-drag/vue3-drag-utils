@@ -54,14 +54,20 @@ const move = (dragIndex: number, hoverIndex: number) => {
   </TransitionGroup>
 </template>
 <style scoped lang="scss">
+.list-move, /* 对移动中的元素应用的过渡 */
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.24s ease;
+  transition: all 0.2s ease;
 }
 
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: scale(0.6);
+// .list-enter-from,
+// .list-leave-to {
+//   // opacity: 0;
+// }
+
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+  position: absolute;
 }
 </style>

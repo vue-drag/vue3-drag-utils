@@ -9,7 +9,7 @@ import VPButton from 'vitepress/dist/client/theme-default/components/VPButton.vu
             src="/static/logo.svg"
             alt="vitepress-custom"
         >
-        <div class="name">vue3-drag-utils</div>
+        <div class="name">Vue3-Drag-Utils</div>
         <div class="text">Experience better drag and drop tools</div>
 
         <div class="buttons">
@@ -19,6 +19,14 @@ import VPButton from 'vitepress/dist/client/theme-default/components/VPButton.vu
                 theme="brand"
                 text="Docs"
                 href="/contents/Guide/1.Introduction/Started.html"
+            >
+            </VPButton>
+            <VPButton
+                tag="a"
+                size="medium"
+                theme="alt"
+                text="Example"
+                href="/contents/Example/simple.html"
             >
             </VPButton>
             <VPButton
