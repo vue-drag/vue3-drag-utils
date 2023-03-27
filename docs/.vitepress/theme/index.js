@@ -5,12 +5,22 @@ import 'vitepress/dist/client/theme-default/styles/base.css';
 import 'vitepress/dist/client/theme-default/styles/utils.css';
 import 'vitepress/dist/client/theme-default/styles/components/custom-block.css';
 import 'vitepress/dist/client/theme-default/styles/components/vp-code.css';
+import 'vitepress/dist/client/theme-default/styles/components/vp-code-group.css';
 import 'vitepress/dist/client/theme-default/styles/components/vp-doc.css';
 import 'vitepress/dist/client/theme-default/styles/components/vp-sponsor.css';
-import './styles/style.scss'
+import './styles/style.scss';
 import NotFound from 'vitepress/dist/client/theme-default/NotFound.vue';
+import VPBadge from 'vitepress/dist/client/theme-default/components/VPBadge.vue';
+import vue3dragutils from 'vue3-drag-utils';
+import 'vue3-drag-utils/es/style.css';
 const theme = {
-    Layout,
-    NotFound
+  Layout,
+  NotFound,
+  enhanceApp: async ({ app }) => {
+    // app is the Vue 3 app instance from `createApp()`. router is VitePress'
+    // custom router. `siteData`` is a `ref`` of current site-level metadata.
+    app.component('Badge', VPBadge);
+    app.use(vue3dragutils);
+  }
 };
 export default theme;
