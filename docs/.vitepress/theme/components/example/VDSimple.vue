@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 const list: any = ref([]);
 for (let i = 0, len = 5; i < len; i++) {
   list.value.push({
