@@ -17,14 +17,13 @@
     "baseUrl": "./",
     "paths": {
       "@/*": [
-        "./../../docs/*"
+        "./../docs/*"
       ]
     }
   },
   "include": [
     "*.ts",
     "*.d.ts",
-    "*.vue",
-    "./auto-imports.d.ts"
+    "*.vue"
   ]
 }

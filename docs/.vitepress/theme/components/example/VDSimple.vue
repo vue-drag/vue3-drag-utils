@@ -1,3 +1,15 @@
+<script setup lang="ts">
+const list: any = ref([]);
+for (let i = 0, len = 5; i < len; i++) {
+  list.value.push({
+    id: i,
+    name: `Box${i}`
+  });
+}
+const deleteHandle = (index: number) => {
+  list.value.splice(index, 1);
+};
+</script>
 <template>
   <div>
     <draggable
@@ -19,19 +31,7 @@
     </draggable>
   </div>
 </template>
-<script setup lang="ts">
-import { ref } from 'vue';
-const list: any = ref([]);
-for (let i = 0, len = 5; i < len; i++) {
-  list.value.push({
-    id: i,
-    name: `Box${i}`
-  });
-}
-const deleteHandle = (index: number) => {
-  list.value.splice(index, 1);
-};
-</script>
+
 <style scoped lang="scss">
 .container {
   display: flex;

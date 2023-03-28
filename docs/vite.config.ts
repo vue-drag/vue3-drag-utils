@@ -21,16 +21,10 @@ export default defineConfig(() => {
           /\.md$/ // .md
         ],
         imports: [
-          // presets
           'vue'
         ],
         // Generate automatically imported TS claim file
-        dts: './.vitepress/auto-imports.d.ts',
-        // compatible eslint
-        eslintrc: {
-          enabled: true, // Default `false`
-          filepath: './docs/.vitepress/.eslintrc-auto-import.json'
-        }
+        dts: './.vitepress/auto-imports.d.ts'
       })
     ],
     resolve: {

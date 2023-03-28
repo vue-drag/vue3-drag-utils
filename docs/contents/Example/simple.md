@@ -2,7 +2,7 @@
 
 ---
 
-<script setup>
+<script setup lang="ts">
 import Simple from "@/.vitepress/theme/components/example/VDSimple.vue"
 import CodeDisplay from '@/.vitepress/theme/components/CodeDisplay/index.vue'
 </script>
