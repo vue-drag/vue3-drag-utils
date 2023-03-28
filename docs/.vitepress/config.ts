@@ -1,8 +1,6 @@
 import navParser from '@vitepress-custom/vitepress-plugin-nav';
 import sidebar from '@vitepress-custom/vitepress-plugin-sidebar';
 import docsData from '@vitepress-custom/vitepress-plugin-fetch-docs';
-import { URL, fileURLToPath } from 'node:url';
-import AutoImport from 'unplugin-auto-import/vite';
 
 export default async () => {
   let pages = await docsData();
@@ -39,34 +37,6 @@ export default async () => {
       markdown: {
         lineNumbers: true
       }
-    },
-    vite: {
-      server: {
-        // open: '/contents/Example/simple.html',
-      },
-      resolve: {
-        alias: {
-          '@': fileURLToPath(new URL('./../../docs', import.meta.url))
-        }
-      },
-      plugins: [
-        AutoImport({
-          /* options */
-          include: [
-            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-            /\.vue$/,
-            /\.vue\?vue/, // .vue
-            /\.md$/ // .md
-          ],
-          imports: ['vue'],
-          // Generate automatically imported TS claim file
-          dts: './../types/auto-imports.d.ts',
-          // compatible eslint
-          eslintrc: {
-            enabled: true // Default `false`
-          }
-        })
-      ]
     }
   };
 };
