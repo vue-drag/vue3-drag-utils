@@ -2,6 +2,7 @@
 import VPLayout from './Layout.vue';
 import Home from './components/home.vue';
 import VCSearch from './components/VCSearch.vue';
+import 'ant-design-vue/dist/antd.dark.css';
 </script>
 <template>
   <DndProvider>

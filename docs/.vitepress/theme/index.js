@@ -13,6 +13,7 @@ import NotFound from 'vitepress/dist/client/theme-default/NotFound.vue';
 import VPBadge from 'vitepress/dist/client/theme-default/components/VPBadge.vue';
 import vue3dragutils from 'vue3-drag-utils';
 import 'vue3-drag-utils/es/style.css';
+// import 'ant-design-vue/dist/antd.dark.css';
 const theme = {
   Layout,
   NotFound,

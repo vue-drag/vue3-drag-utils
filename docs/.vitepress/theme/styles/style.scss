@@ -1,7 +1,32 @@
 span.VPLink {
+  .link-text,
+  .link-text.light {
+    font-weight: bold;
+  }
+}
 
-    .link-text,
-    .link-text.light {
-        font-weight: bold;
-    }
+body {
+  margin: 0;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  line-height: 24px;
+  font-family: var(--vp-font-family-base) !important;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--vp-c-text-1) !important;
+  background-color: var(--vp-c-bg) !important;
+  direction: ltr;
+  font-synthesis: style;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--vp-c-text-1) !important;
 }

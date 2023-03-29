@@ -7,10 +7,10 @@ const props = withDefaults(
   }>(),
   {}
 );
-console.log("inject('typeName')", inject('typeName'));
+
 const typeName: any = inject('typeName');
 const acceptName: any = inject('acceptName');
-console.log("inject('acceptName')", inject('acceptName'));
+
 const [, drag] = useDrag(() => ({
   type: typeName,
   canDrag: true,
@@ -25,8 +25,6 @@ const [, drag] = useDrag(() => ({
 const [, drop] = useDrop(() => ({
   accept: acceptName,
   hover: (item: any, monitor: any) => {
-    console.log('hover', item, monitor);
-    // console.log(monitor.getClientOffset());
     if (!dragRef.value) {
       return;
     }
@@ -37,12 +35,12 @@ const [, drop] = useDrop(() => ({
     }
     const dropRect = dragRef.value?.getBoundingClientRect();
     const clientOffset = monitor.getClientOffset();
-    console.log('monitor', dropRect, clientOffset);
+    // console.log('monitor', dropRect, clientOffset);
     props.move(dragIndex, hoverIndex);
     item.index = hoverIndex;
   },
   drop: (item: any, monitor: any) => {
-    console.log('drop', item, monitor);
+    // console.log('drop', item, monitor);
   }
 }));
 

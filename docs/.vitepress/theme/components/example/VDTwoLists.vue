@@ -29,12 +29,7 @@ const deleteHandleB = (index: number) => {
       <template #item="{ data, index }">
         <div class="item">
           <div>{{ data.name }}</div>
-          <button
-            @click="deleteHandleA(index)"
-            class="delete"
-          >
-            Delete
-          </button>
+          <delete-outlined @click="deleteHandleA(index)" />
         </div>
       </template>
     </draggable>
@@ -46,12 +41,7 @@ const deleteHandleB = (index: number) => {
       <template #item="{ data, index }">
         <div class="item">
           <div>{{ data.name }}</div>
-          <button
-            @click="deleteHandleB(index)"
-            class="delete"
-          >
-            Delete
-          </button>
+          <delete-outlined @click="deleteHandleB(index)" />
         </div>
       </template>
     </draggable>
@@ -83,15 +73,6 @@ const deleteHandleB = (index: number) => {
       justify-content: space-between;
       padding: 0 10px;
       box-sizing: border-box;
-
-      .delete {
-        background-color: var(--vp-c-text-1);
-        color: var(--vp-c-bg-elv);
-        padding: 0 5px;
-        box-sizing: border-box;
-        border-radius: 4px;
-        cursor: pointer;
-      }
     }
   }
 }
