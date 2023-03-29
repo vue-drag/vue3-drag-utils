@@ -1,34 +1,59 @@
 <script setup lang="ts">
+// Define emits
 const emit = defineEmits<{
   (e: 'update:list', value: any): void;
 }>();
+// Define props
 const props = withDefaults(
   defineProps<{
-    name?: string;
+    dragName?: string;
+    dropName?: string | string[];
     list: any;
     itemKey?: string;
   }>(),
   {
-    name: 'drag',
     itemKey: 'id'
   }
 );
+// Generate uuid
+const uuid = v4();
+// Parse dropName
+const parser = (data: string | string[] | undefined) => {
+  let array = [];
+  if (typeof data === 'string') {
+    array.push(data);
+  } else if (Array.isArray(data)) {
+    array = [...data];
+  } else {
+    array = [uuid];
+  }
+  return array;
+};
+// Compute typeName
+const typeName = computed(() => {
+  return props.dragName || uuid;
+});
+// Compute acceptName
+const acceptName = computed(() => {
+  return parser(props.dropName);
+});
+// Provide typeName and acceptName
+provide('typeName', typeName.value);
+provide('acceptName', acceptName.value);
+// Compute dragList
 const dragList = computed({
   get() {
     return useCloned(props.list).cloned.value;
   },
   set(val) {
-    console.log('dragList', val);
     emit('update:list', val);
   }
 });
 
+// Move function
 const move = (dragIndex: number, hoverIndex: number) => {
   const clone = [...dragList.value];
   const item = clone[dragIndex];
-  // clone.splice(dragIndex, 1);
-  // clone.splice(hoverIndex, 0, item);
-  // dragList.value = clone;
   dragList.value.splice(dragIndex, 1);
   dragList.value.splice(hoverIndex, 0, item);
 };

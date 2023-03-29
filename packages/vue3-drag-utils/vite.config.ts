@@ -2,7 +2,6 @@ import { defineConfig, loadEnv } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-import DefineOptions from 'unplugin-vue-define-options/vite';
 
 // Auto import APIs on-demand for Vite
 // Useage:https://github.com/antfu/unplugin-auto-import
@@ -15,7 +14,6 @@ import Components from 'unplugin-vue-components/vite';
 export default defineConfig(() => {
   return {
     plugins: [
-      DefineOptions(),
       vue(),
       AutoImport({
         /* options */
@@ -28,7 +26,9 @@ export default defineConfig(() => {
         imports: [
           'vue',
           {
-            '@vueuse/core': ['useCloned', 'useDebounceFn']
+            '@vueuse/core': ['useCloned', 'useDebounceFn'],
+            'vue3-dnd': ['useDrag', 'useDrop'],
+            uuid: ['v4']
           }
         ],
         dts: 'src/types/auto-imports.d.ts',
@@ -50,6 +50,7 @@ export default defineConfig(() => {
     },
     build: {
       minify: true,
+      sourcemap: true,
       lib: {
         entry: resolve(__dirname, './index.ts'), //指定组件编译入口文件
         name: 'vue3DragUtils',

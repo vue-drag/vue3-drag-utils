@@ -1,16 +1,19 @@
+# Two Lists
+
+---
+
 <script setup lang="ts">
-import { ref } from 'vue';
-const list: any = ref([]);
-for (let i = 0, len = 5; i < len; i++) {
-  list.value.push({
-    id: i,
-    name: `Box${i}`
-  });
-}
-const deleteHandle = (index: number) => {
-  list.value.splice(index, 1);
-};
+import { ref } from "vue"
+import VDTwoLists from "@/.vitepress/theme/components/example/VDTwoLists.vue"
+import CodeDisplay from '@/.vitepress/theme/components/CodeDisplay/index.vue'
 </script>
+
+<VDTwoLists></VDTwoLists>
+<CodeDisplay>
+
+::: code-group
+
+```vue [Typescript]
 <template>
   <div>
     <draggable
@@ -25,14 +28,26 @@ const deleteHandle = (index: number) => {
             @click="deleteHandle(index)"
             class="delete"
           >
-            Delete
+            delete
           </button>
         </div>
       </template>
     </draggable>
   </div>
 </template>
-
+<script setup lang="ts">
+import { ref } from 'vue';
+const list: any = ref([]);
+for (let i = 0, len = 5; i < len; i++) {
+  list.value.push({
+    id: i,
+    name: `Box${i}`
+  });
+}
+const deleteHandle = (index: number) => {
+  list.value.splice(index, 1);
+};
+</script>
 <style scoped lang="scss">
 .container {
   display: flex;
@@ -64,3 +79,15 @@ const deleteHandle = (index: number) => {
   }
 }
 </style>
+```
+
+```sh [pnpm]
+$ pnpm add -D vitepress
+```
+
+```sh [yarn]
+$ yarn add -D vitepress
+```
+
+:::
+</CodeDisplay>

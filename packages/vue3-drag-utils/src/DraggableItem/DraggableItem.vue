@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useDrag, useDrop } from 'vue3-dnd';
 const props = withDefaults(
   defineProps<{
     index: number;
@@ -8,8 +7,12 @@ const props = withDefaults(
   }>(),
   {}
 );
+console.log("inject('typeName')", inject('typeName'));
+const typeName: any = inject('typeName');
+const acceptName: any = inject('acceptName');
+console.log("inject('acceptName')", inject('acceptName'));
 const [, drag] = useDrag(() => ({
-  type: 'drag',
+  type: typeName,
   canDrag: true,
   item: () => {
     return { index: props.index, data: props.data };
@@ -20,8 +23,9 @@ const [, drag] = useDrag(() => ({
   })
 }));
 const [, drop] = useDrop(() => ({
-  accept: ['drag'],
+  accept: acceptName,
   hover: (item: any, monitor: any) => {
+    console.log('hover', item, monitor);
     // console.log(monitor.getClientOffset());
     if (!dragRef.value) {
       return;
@@ -36,6 +40,9 @@ const [, drop] = useDrop(() => ({
     console.log('monitor', dropRect, clientOffset);
     props.move(dragIndex, hoverIndex);
     item.index = hoverIndex;
+  },
+  drop: (item: any, monitor: any) => {
+    console.log('drop', item, monitor);
   }
 }));
 

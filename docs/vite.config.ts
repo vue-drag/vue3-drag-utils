@@ -5,7 +5,7 @@ import { fileURLToPath, URL } from 'node:url';
 export default defineConfig(() => {
   return {
     server: {
-      open: '/contents/Example/simple.html'
+      open: '/contents/Example/Simple.html'
     },
     resolve: {
       alias: {

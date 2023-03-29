@@ -35,7 +35,7 @@ const toggleVisible = () => {
     .icon {
       display: block;
       width: 24px;
-      margin-right: 4px;
+      margin-right: 6px;
     }
   }
 }
