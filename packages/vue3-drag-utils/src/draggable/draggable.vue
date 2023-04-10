@@ -6,12 +6,14 @@ const emit = defineEmits<{
 // Define props
 const props = withDefaults(
   defineProps<{
+    disabled?: boolean;
     dragName?: string;
     dropName?: string | string[];
     list: any;
     itemKey?: string;
   }>(),
   {
+    disabled: false,
     itemKey: 'id'
   }
 );
@@ -37,9 +39,13 @@ const typeName = computed(() => {
 const acceptName = computed(() => {
   return parser(props.dropName);
 });
+const canDrag = computed(() => {
+  return !props.disabled;
+});
 // Provide typeName and acceptName
 provide('typeName', typeName.value);
 provide('acceptName', acceptName.value);
+provide('canDrag', canDrag);
 // Compute dragList
 const dragList = computed({
   get() {
@@ -49,13 +55,13 @@ const dragList = computed({
     emit('update:list', val);
   }
 });
-
 // Move function
 const move = (dragIndex: number, hoverIndex: number) => {
   const clone = [...dragList.value];
   const item = clone[dragIndex];
-  dragList.value.splice(dragIndex, 1);
-  dragList.value.splice(hoverIndex, 0, item);
+  clone.splice(dragIndex, 1);
+  clone.splice(hoverIndex, 0, item);
+  dragList.value = clone;
 };
 </script>
 <template>
@@ -69,6 +75,7 @@ const move = (dragIndex: number, hoverIndex: number) => {
       :move="move"
       :index="index"
       :data="item"
+      :disabled="disabled"
     >
       <slot
         name="item"

@@ -10,7 +10,11 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
+    ACol: typeof import('ant-design-vue/es')['Col']
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
+    AForm: typeof import('ant-design-vue/es')['Form']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    ARow: typeof import('ant-design-vue/es')['Row']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     ATable: typeof import('ant-design-vue/es')['Table']
     CodeDisplay: typeof import('./../.vitepress/theme/components/CodeDisplay/index.vue')['default']
@@ -21,6 +25,8 @@ declare module '@vue/runtime-core' {
     IconArrowRight: typeof import('./../.vitepress/theme/components/icons/iconArrowRight.vue')['default']
     IconSearch: typeof import('./../.vitepress/theme/components/icons/iconSearch.vue')['default']
     Layout: typeof import('./../.vitepress/theme/Layout.vue')['default']
+    RawDisplay: typeof import('./../.vitepress/theme/components/RawDisplay/index.vue')['default']
+    RowDisplay: typeof import('./../.vitepress/theme/components/RowDisplay/index.vue')['default']
     Theme: typeof import('./../.vitepress/theme/Theme.vue')['default']
     VCSearch: typeof import('./../.vitepress/theme/components/VCSearch.vue')['default']
     VDSimple: typeof import('./../.vitepress/theme/components/example/VDSimple.vue')['default']

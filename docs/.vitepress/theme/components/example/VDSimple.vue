@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const list: any = ref([]);
-for (let i = 0, len = 5; i < len; i++) {
-  list.value.push({
-    id: i,
-    name: `Box${i}`
-  });
-}
+
 const deleteHandle = (index: number) => {
   list.value.splice(index, 1);
 };
-const checked = ref(false);
+const enabled = ref(true);
 const dataSource = [
   {
     parameter: 'list(v-model)',
@@ -19,34 +14,74 @@ const dataSource = [
     default: '-'
   }
 ];
+const add = () => {
+  const len = list.value.length;
+  console.log(len);
+  list.value.push({
+    id: len,
+    name: `Box${len}`
+  });
+};
+const reset = () => {
+  list.value = [];
+  for (let i = 0, len = 3; i < len; i++) {
+    list.value.push({
+      id: i,
+      name: `Box${i}`
+    });
+  }
+};
+reset();
 </script>
 <template>
   <div>
-    <a-switch v-model:checked="checked" />
-    <a-button type="primary">Primary Button</a-button>
-    <a-drawer
-      v-model:visible="checked"
-      class="custom-class"
-      style="color: red"
-      title="Basic Drawer"
-      placement="right"
+    <a-form>
+      <a-form-item label="添加">
+        <a-button
+          type="primary"
+          @click="add"
+          >添加</a-button
+        >
+      </a-form-item>
+      <a-form-item label="还原">
+        <a-button
+          type="primary"
+          @click="reset"
+          >还原</a-button
+        >
+      </a-form-item>
+      <a-form-item label="启用">
+        <a-switch v-model:checked="enabled" />
+      </a-form-item>
+    </a-form>
+    <a-row
+      type="flex"
+      :gutter="24"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </a-drawer>
-    <draggable
-      v-model:list="list"
-      class="container"
-      item-key="id"
-    >
-      <template #item="{ data, index }">
-        <div class="box">
-          <div>{{ data.name }}</div>
-          <delete-outlined @click="deleteHandle(index)" />
-        </div>
-      </template>
-    </draggable>
+      <a-col :span="12">
+        <draggable
+          :disabled="!enabled"
+          v-model:list="list"
+          class="container"
+          item-key="id"
+        >
+          <template #item="{ data, index }">
+            <div class="box">
+              <div>{{ data.name }}</div>
+              <delete-outlined @click="deleteHandle(index)" />
+            </div>
+          </template>
+        </draggable>
+      </a-col>
+      <a-col :span="12">
+        <RawDisplay
+          title="list"
+          :list="list"
+        >
+        </RawDisplay>
+      </a-col>
+    </a-row>
+
     <CommonTable :dataSource="dataSource"> </CommonTable>
   </div>
 </template>
@@ -70,6 +105,11 @@ const dataSource = [
     justify-content: space-between;
     padding: 0 10px;
     box-sizing: border-box;
+  }
+}
+:deep(.ant-form-item-label) {
+  & > label {
+    color: var(--vp-c-text-1);
   }
 }
 </style>

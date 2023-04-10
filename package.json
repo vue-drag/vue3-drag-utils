@@ -33,8 +33,8 @@
     "@vue/tsconfig": "^0.1.3",
     "sass": "^1.56.1",
     "typescript": "~4.9.5",
-    "unplugin-vue-components": "^0.24.0",
     "unplugin-auto-import": "^0.14.4",
+    "unplugin-vue-components": "^0.24.0",
     "vitepress": "^1.0.0-alpha.61",
     "vue": "^3.2.45"
   },

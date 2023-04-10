@@ -3,6 +3,7 @@ const props = withDefaults(
   defineProps<{
     index: number;
     data: any;
+    disabled: boolean;
     move: (dragIndex: number, hoverIndex: number) => void;
   }>(),
   {}
@@ -10,17 +11,17 @@ const props = withDefaults(
 
 const typeName: any = inject('typeName');
 const acceptName: any = inject('acceptName');
-
+const canDrag = ref<boolean>(inject('canDrag', true));
 const [, drag] = useDrag(() => ({
   type: typeName,
-  canDrag: true,
   item: () => {
     return { index: props.index, data: props.data };
   },
   collect: (monitor) => ({
     isDragging: monitor.isDragging(),
     handlerId: monitor.getHandlerId()
-  })
+  }),
+  canDrag: () => canDrag.value
 }));
 const [, drop] = useDrop(() => ({
   accept: acceptName,
