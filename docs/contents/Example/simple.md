@@ -6,7 +6,7 @@
 import VDSimple from "@/.vitepress/theme/components/example/VDSimple.vue"
 import CodeDisplay from '@/.vitepress/theme/components/CodeDisplay/index.vue'
 </script>
-asfa
+
 <VDSimple></VDSimple>
 
 <CodeDisplay>

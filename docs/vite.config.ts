@@ -15,7 +15,7 @@ export default defineConfig(() => {
         '@': fileURLToPath(new URL('./../docs', import.meta.url))
       }
     },
-    plugins:[
+    plugins: [
       AutoImport({
         /* options */
         include: [
@@ -24,22 +24,20 @@ export default defineConfig(() => {
           /\.vue\?vue/, // .vue
           /\.md$/ // .md
         ],
-        imports: [
-          'vue'
-        ],
+        imports: ['vue'],
         // Generate automatically imported TS claim file
         dts: 'types/auto-imports.d.ts'
       }),
       Components({
         /* options */
         dts: 'types/components.d.ts',
-        dirs: ['docs'],
+        dirs: ['.vitepress'],
         resolvers: [
           AntDesignVueResolver({
             resolveIcons: true
           })
         ]
-      }),
+      })
     ]
   };
 });

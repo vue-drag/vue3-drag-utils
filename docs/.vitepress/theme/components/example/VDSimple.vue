@@ -13,34 +13,10 @@ const deleteHandle = (index: number) => {
 const checked = ref(false);
 const dataSource = [
   {
-    key: '1',
-    parameter: '胡彦斌',
-    description: '西湖区湖底公园1号',
-    type: 'string',
-    default:'a'
-  }
-];
-
-const columns = [
-  {
-    title: '参数',
-    dataIndex: 'parameter',
-    key: 'parameter'
-  },
-  {
-    title: '说明',
-    dataIndex: 'description',
-    key: 'description'
-  },
-  {
-    title: '类型',
-    dataIndex: 'type',
-    key: 'type'
-  },
-  {
-    title: '默认值',
-    dataIndex: 'default',
-    key: 'default'
+    parameter: 'list(v-model)',
+    description: 'dataSource array for list',
+    type: 'any[]',
+    default: '-'
   }
 ];
 </script>
@@ -71,11 +47,7 @@ const columns = [
         </div>
       </template>
     </draggable>
-    <a-table
-      :dataSource="dataSource"
-      :columns="columns"
-      :pagination="false"
-    />
+    <CommonTable :dataSource="dataSource"> </CommonTable>
   </div>
 </template>
 
