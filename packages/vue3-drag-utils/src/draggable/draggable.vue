@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sortMove } from '@/utils/sort';
 // Define emits
 const emit = defineEmits<{
   (e: 'update:list', value: any): void;
@@ -23,9 +24,9 @@ const uuid = v4();
 const parser = (data: string | string[] | undefined) => {
   let array = [];
   if (typeof data === 'string') {
-    array.push(data);
+    array = [data, uuid];
   } else if (Array.isArray(data)) {
-    array = [...data];
+    array = [...data, uuid];
   } else {
     array = [uuid];
   }
@@ -43,8 +44,9 @@ const canDrag = computed(() => {
   return !props.disabled;
 });
 // Provide typeName and acceptName
-provide('typeName', typeName.value);
-provide('acceptName', acceptName.value);
+
+provide('typeName', typeName);
+provide('acceptName', acceptName);
 provide('canDrag', canDrag);
 // Compute dragList
 const dragList = computed({
@@ -56,12 +58,12 @@ const dragList = computed({
   }
 });
 // Move function
-const move = (dragIndex: number, hoverIndex: number) => {
-  const clone = [...dragList.value];
-  const item = clone[dragIndex];
-  clone.splice(dragIndex, 1);
-  clone.splice(hoverIndex, 0, item);
-  dragList.value = clone;
+const move = (item: any, dragIndex: number, hoverIndex: number) =>
+  sortMove(dragList, dragIndex, hoverIndex, item, hasItem(item));
+const hasItem = (item: any) => {
+  return dragList.value
+    .map((i: any) => JSON.stringify(toRaw(i)))
+    .includes(JSON.stringify(toRaw(item)));
 };
 </script>
 <template>
@@ -76,6 +78,7 @@ const move = (dragIndex: number, hoverIndex: number) => {
       :index="index"
       :data="item"
       :disabled="disabled"
+      :hasItem="hasItem"
     >
       <slot
         name="item"

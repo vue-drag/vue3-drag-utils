@@ -1,19 +1,20 @@
 <script setup lang="ts">
+import { sortHandle } from '@/utils/sort';
 const props = withDefaults(
   defineProps<{
     index: number;
     data: any;
     disabled: boolean;
-    move: (dragIndex: number, hoverIndex: number) => void;
+    move: (item: any, dragIndex: number, hoverIndex: number) => void;
+    hasItem: (item: any) => void;
   }>(),
   {}
 );
-
-const typeName: any = inject('typeName');
-const acceptName: any = inject('acceptName');
+const typeName: any = ref(inject('typeName'));
+const acceptName: any = ref(inject('acceptName'));
 const canDrag = ref<boolean>(inject('canDrag', true));
 const [, drag] = useDrag(() => ({
-  type: typeName,
+  type: typeName.value,
   item: () => {
     return { index: props.index, data: props.data };
   },
@@ -24,37 +25,30 @@ const [, drag] = useDrag(() => ({
   canDrag: () => canDrag.value
 }));
 const [, drop] = useDrop(() => ({
-  accept: acceptName,
+  accept: acceptName.value,
   hover: (item: any, monitor: any) => {
-    if (!dragRef.value) {
-      return;
-    }
-    const dragIndex = item.index;
-    const hoverIndex = props.index;
-    if (dragIndex === hoverIndex) {
-      return;
-    }
-    const dropRect = dragRef.value?.getBoundingClientRect();
-    const clientOffset = monitor.getClientOffset();
-    // console.log('monitor', dropRect, clientOffset);
-    props.move(dragIndex, hoverIndex);
-    item.index = hoverIndex;
+    // console.log(
+    //   'DraggableItem Hover',
+    //   item,
+    //   props.uuid,
+    //   monitor.getHandlerId(),
+    //   monitor.getItemType()
+    // );
+    sortHandle(dragRef, item, props, monitor);
   },
   drop: (item: any, monitor: any) => {
     // console.log('drop', item, monitor);
-  }
+  },
+  collect: (monitor: any) => ({
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
+  })
 }));
 
 const dragRef: any = ref<HTMLDivElement>();
 const setRef: any = (el: HTMLDivElement) => {
   dragRef.value = drag(drop(el)) as HTMLDivElement;
 };
-watch(
-  () => props.index,
-  (newValue, oldValue) => {
-    console.log('index', newValue, oldValue);
-  }
-);
 </script>
 <template>
   <div

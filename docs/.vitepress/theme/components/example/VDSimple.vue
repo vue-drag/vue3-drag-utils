@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const list: any = ref([]);
-
-const deleteHandle = (index: number) => {
-  list.value.splice(index, 1);
-};
 const enabled = ref(true);
 const dataSource = [
   {
@@ -16,7 +12,6 @@ const dataSource = [
 ];
 const add = () => {
   const len = list.value.length;
-  console.log(len);
   list.value.push({
     id: len,
     name: `Box${len}`
@@ -32,6 +27,10 @@ const reset = () => {
   }
 };
 reset();
+
+const deleteHandle = (index: number) => {
+  list.value.splice(index, 1);
+};
 </script>
 <template>
   <div>
@@ -95,8 +94,6 @@ reset();
   .box {
     width: 100%;
     height: 50px;
-    border: 1px solid var(--vp-c-text-1);
-    border-radius: 4px;
     text-align: center;
     position: relative;
     display: flex;
@@ -105,6 +102,9 @@ reset();
     justify-content: space-between;
     padding: 0 10px;
     box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid var(--vp-c-border);
+    background-color: var(--vp-c-bg-elv-down);
   }
 }
 :deep(.ant-form-item-label) {

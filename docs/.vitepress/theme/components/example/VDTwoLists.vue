@@ -2,78 +2,140 @@
 import { ref } from 'vue';
 const listA: any = ref([]);
 const listB: any = ref([]);
-for (let i = 0, len = 5; i < len; i++) {
-  listA.value.push({
-    id: i,
-    name: `BoxA${i}`
-  });
-  listB.value.push({
-    id: i,
-    name: `BoxB${i}`
-  });
-}
-const deleteHandleA = (index: number) => {
-  listA.value.splice(index, 1);
+const dataSource = [
+  {
+    parameter: 'list(v-model)',
+    description: 'dataSource array for list',
+    type: 'any[]',
+    default: '-'
+  }
+];
+
+const reset = () => {
+  listA.value = [];
+  listB.value = [];
+  for (let i = 0, len = 3; i < len; i++) {
+    listA.value.push({
+      id: i,
+      name: `BoxA${i}`
+    });
+    listB.value.push({
+      id: i,
+      name: `BoxB${i}`
+    });
+  }
 };
-const deleteHandleB = (index: number) => {
-  listB.value.splice(index, 1);
-};
+reset();
 </script>
 <template>
-  <div class="container">
-    <draggable
-      v-model:list="listA"
-      class="draggable"
-      item-key="id"
-    >
-      <template #item="{ data, index }">
-        <div class="item">
-          <div>{{ data.name }}</div>
-          <delete-outlined @click="deleteHandleA(index)" />
-        </div>
-      </template>
-    </draggable>
-    <draggable
-      v-model:list="listB"
-      class="draggable"
-      item-key="id"
-    >
-      <template #item="{ data, index }">
-        <div class="item">
-          <div>{{ data.name }}</div>
-          <delete-outlined @click="deleteHandleB(index)" />
-        </div>
-      </template>
-    </draggable>
+  <div>
+    <a-row :gutter="24">
+      <a-col :span="12">
+        <a-row>
+          <a-form>
+            <a-form-item label="还原">
+              <a-button
+                type="primary"
+                @click="reset"
+                >还原</a-button
+              >
+            </a-form-item>
+          </a-form>
+        </a-row>
+        <a-row>
+          <a-col :span="24">
+            <draggable
+              dragName="twoList"
+              dropName="twoList"
+              v-model:list="listA"
+              class="draggable"
+              item-key="id"
+            >
+              <template #item="{ data, index }">
+                <div class="box">
+                  <div>{{ data.name }}</div>
+                </div>
+              </template>
+            </draggable>
+          </a-col>
+        </a-row>
+        <a-row>
+          <RawDisplay
+            title="listA"
+            :list="listA"
+          >
+          </RawDisplay>
+        </a-row>
+      </a-col>
+      <a-col :span="12">
+        <a-row>
+          <a-form>
+            <a-form-item label="还原">
+              <a-button
+                type="primary"
+                @click="reset"
+                >还原</a-button
+              >
+            </a-form-item>
+          </a-form>
+        </a-row>
+        <a-row>
+          <a-col :span="24">
+            <draggable
+              dragName="twoList"
+              dropName="twoList"
+              v-model:list="listB"
+              class="draggable"
+              item-key="id"
+            >
+              <template #item="{ data, index }">
+                <div class="box">
+                  <div>{{ data.name }}</div>
+                </div>
+              </template>
+            </draggable>
+          </a-col>
+        </a-row>
+        <a-row>
+          <RawDisplay
+            title="listB"
+            :list="listB"
+          >
+          </RawDisplay>
+        </a-row>
+      </a-col>
+    </a-row>
+
+    <CommonTable :dataSource="dataSource"> </CommonTable>
   </div>
 </template>
 
 <style scoped lang="scss">
-.container {
-  width: 100%;
+.draggable {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   gap: 5px;
+  margin-bottom: 20px;
 
-  .draggable {
+  .box {
     width: 100%;
+    height: 50px;
+    text-align: center;
+    position: relative;
     display: flex;
-    flex-flow: column nowrap;
-    gap: 5px;
-    .item {
-      width: 100%;
-      height: 50px;
-      border: 1px solid var(--vp-c-text-1);
-      border-radius: 4px;
-      text-align: center;
-      position: relative;
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid var(--vp-c-border);
+    background-color: var(--vp-c-bg-elv-down);
+  }
+}
+:deep(.ant-form-item-label) {
+  & > label {
+    color: var(--vp-c-text-1);
   }
 }
 </style>
