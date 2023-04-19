@@ -20,7 +20,7 @@ interface DropResult {
   uuid: string;
 }
 
-const uuid = inject('uuid');
+const uuid: any = ref(inject('uuid'));
 const typeName: any = ref(inject('typeName'));
 const acceptName: any = ref(inject('acceptName'));
 const canDrag = ref<boolean>(inject('canDrag', true));
@@ -30,7 +30,7 @@ const [dragCollect, drag] = useDrag(() => ({
   type: typeName.value,
   canDrag: () => canDrag.value,
   item: () => {
-    return { index: props.index, uuid, data: props.data };
+    return { index: props.index, uuid: uuid.value, data: props.data };
   },
   options: {
     dropEffect: dropEffect.value
@@ -39,12 +39,14 @@ const [dragCollect, drag] = useDrag(() => ({
     canDrag: monitor.canDrag(),
     getItem: monitor.getItem(),
     getItemType: monitor.getItemType(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
+    uuid: uuid.value
   }),
   end: (data, monitor) => {
+    console.log('end', uuid.value);
     const didDrop = monitor.didDrop();
     const dropResult = monitor.getDropResult() as DropResult;
-    const isSelf = uuid === dropResult.uuid;
+    const isSelf = uuid.value === dropResult?.uuid;
     if (didDrop && dropResult) {
       props.dragEnd({ ...data, isSelf });
     }
@@ -69,15 +71,16 @@ const [dropCollect, drop] = useDrop(() => ({
   drop: (data: any, monitor: any) => {
     const dragIndex = data.index;
     const hoverIndex = props.index;
-    const isSelf = uuid === data.uuid;
+    const isSelf = uuid.value === data.uuid;
     props.dropMove(data.data, dragIndex, hoverIndex, isSelf);
-    return { ...data, uuid };
+    return { ...data, uuid: uuid.value };
   },
   collect: (monitor: any) => ({
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
     getItem: monitor.getItem(),
-    getDropResult: monitor.getDropResult()
+    getDropResult: monitor.getDropResult(),
+    uuid: uuid.value
   })
 }));
 
@@ -96,8 +99,11 @@ const setRef: any = (el: HTMLDivElement) => {
       (dropEffect === 'move' && !dragCollect.isDragging)
     "
   >
-    <!-- {{ JSON.stringify(dragCollect, null, 2) }} -->
+    {{ uuid }}
+    {{ JSON.stringify(dragCollect, null, 2) }}
     <!-- {{ JSON.stringify(dropCollect, null, 2) }} -->
+    <!-- {{ dragCollect?.getItem?.uuid }} -->
+    <!-- {{ dragCollect?.getItem?.uuid && dragCollect?.getItem?.uuid === uuid }} -->
     <slot></slot>
   </div>
 </template>

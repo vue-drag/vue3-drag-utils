@@ -57,7 +57,7 @@ provide('dropEffect', dropEffect);
 // Compute dragList
 const dragList = computed({
   get() {
-    return useCloned(props.list).cloned.value;
+    return props.list;
   },
   set(val) {
     emit('update:list', val);
