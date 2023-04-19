@@ -6,11 +6,12 @@ export const sortMove = (
   hasItem: any
 ) => {
   const clone = [...list.value];
+  console.log('sortMove', hasItem);
   hasItem && clone.splice(dragIndex, 1);
   clone.splice(hoverIndex, 0, item);
   list.value = clone;
 };
-export const sortHandle = (ref: any, data: any, props: any, monitor: any) => {
+export const sortHandle = (ref: any, data: any, props: any) => {
   if (!ref.value) {
     return;
   }
@@ -21,4 +22,15 @@ export const sortHandle = (ref: any, data: any, props: any, monitor: any) => {
   }
   props.move(data.data, dragIndex, hoverIndex);
   data.index = hoverIndex;
+};
+export const dragSortHandle = (ref: any, data: any, props: any) => {
+  if (!ref.value) {
+    return;
+  }
+  const dragIndex = data.index;
+  const hoverIndex = props.index;
+  if (dragIndex === hoverIndex && props.hasItem(data)) {
+    return;
+  }
+  props.move(data.data, dragIndex, hoverIndex);
 };

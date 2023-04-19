@@ -2,6 +2,12 @@
 import { ref } from 'vue';
 const listA: any = ref([]);
 const listB: any = ref([]);
+const listAOptions = ref({
+  dropEffect: 'move'
+});
+const listBOptions = ref({
+  dropEffect: 'move'
+});
 const dataSource = [
   {
     parameter: 'list(v-model)',
@@ -40,6 +46,15 @@ reset();
                 >还原</a-button
               >
             </a-form-item>
+            <a-form-item label="拖拽效果">
+              <a-radio-group
+                v-model:value="listAOptions.dropEffect"
+                button-style="solid"
+              >
+                <a-radio-button value="move">move</a-radio-button>
+                <a-radio-button value="copy">copy</a-radio-button>
+              </a-radio-group>
+            </a-form-item>
           </a-form>
         </a-row>
         <a-row>
@@ -47,6 +62,7 @@ reset();
             <draggable
               dragName="twoList"
               dropName="twoList"
+              :dropEffect="listAOptions.dropEffect"
               v-model:list="listA"
               class="draggable"
               item-key="id"
@@ -77,6 +93,15 @@ reset();
                 >还原</a-button
               >
             </a-form-item>
+            <a-form-item label="拖拽效果">
+              <a-radio-group
+                v-model:value="listBOptions.dropEffect"
+                button-style="solid"
+              >
+                <a-radio-button value="move">move</a-radio-button>
+                <a-radio-button value="copy">copy</a-radio-button>
+              </a-radio-group>
+            </a-form-item>
           </a-form>
         </a-row>
         <a-row>
@@ -84,6 +109,7 @@ reset();
             <draggable
               dragName="twoList"
               dropName="twoList"
+              :dropEffect="listBOptions.dropEffect"
               v-model:list="listB"
               class="draggable"
               item-key="id"

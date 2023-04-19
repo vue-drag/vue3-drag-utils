@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import { sortMove } from '@/utils/sort';
 // Define emits
 const emit = defineEmits<{
   (e: 'update:list', value: any): void;
 }>();
+type DropEffect = 'move' | 'copy';
 // Define props
 const props = withDefaults(
   defineProps<{
     disabled?: boolean;
     dragName?: string;
     dropName?: string | string[];
+    dropEffect?: DropEffect;
     list: any;
     itemKey?: string;
   }>(),
   {
     disabled: false,
-    itemKey: 'id'
+    itemKey: 'id',
+    dropEffect: 'move' as DropEffect
   }
 );
 // Generate uuid
@@ -43,11 +45,15 @@ const acceptName = computed(() => {
 const canDrag = computed(() => {
   return !props.disabled;
 });
+const dropEffect = computed(() => {
+  return props.dropEffect;
+});
 // Provide typeName and acceptName
-
+provide('uuid', uuid);
 provide('typeName', typeName);
 provide('acceptName', acceptName);
 provide('canDrag', canDrag);
+provide('dropEffect', dropEffect);
 // Compute dragList
 const dragList = computed({
   get() {
@@ -57,13 +63,22 @@ const dragList = computed({
     emit('update:list', val);
   }
 });
-// Move function
-const move = (item: any, dragIndex: number, hoverIndex: number) =>
-  sortMove(dragList, dragIndex, hoverIndex, item, hasItem(item));
-const hasItem = (item: any) => {
-  return dragList.value
-    .map((i: any) => JSON.stringify(toRaw(i)))
-    .includes(JSON.stringify(toRaw(item)));
+
+const dragEnd = (data: any) => {
+  if (dropEffect.value === 'move' && !data.isSelf) {
+    dragList.value.splice(data.index, 1);
+  }
+};
+const dropMove = (
+  item: any,
+  dragIndex: number,
+  hoverIndex: number,
+  isSelf: boolean
+) => {
+  const clone = [...dragList.value];
+  isSelf && clone.splice(dragIndex, 1);
+  clone.splice(hoverIndex, 0, item);
+  dragList.value = clone;
 };
 </script>
 <template>
@@ -74,11 +89,10 @@ const hasItem = (item: any) => {
     <DraggableItem
       v-for="(item, index) in dragList"
       :key="itemKey ? item[itemKey] : item"
-      :move="move"
       :index="index"
       :data="item"
-      :disabled="disabled"
-      :hasItem="hasItem"
+      :dragEnd="dragEnd"
+      :dropMove="dropMove"
     >
       <slot
         name="item"

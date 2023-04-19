@@ -1,47 +1,83 @@
 <script setup lang="ts">
-import { sortHandle } from '@/utils/sort';
 const props = withDefaults(
   defineProps<{
     index: number;
     data: any;
-    disabled: boolean;
-    move: (item: any, dragIndex: number, hoverIndex: number) => void;
-    hasItem: (item: any) => void;
+    dragEnd: (data: any) => void;
+    dropMove: (
+      item: any,
+      dragIndex: number,
+      hoverIndex: number,
+      isSelf: boolean
+    ) => void;
   }>(),
   {}
 );
+interface DropResult {
+  dropEffect: string;
+  index: number;
+  data: any;
+  uuid: string;
+}
+
+const uuid = inject('uuid');
 const typeName: any = ref(inject('typeName'));
 const acceptName: any = ref(inject('acceptName'));
 const canDrag = ref<boolean>(inject('canDrag', true));
-const [, drag] = useDrag(() => ({
+const dropEffect = ref<string | undefined>(inject('dropEffect'));
+
+const [dragCollect, drag] = useDrag(() => ({
   type: typeName.value,
+  canDrag: () => canDrag.value,
   item: () => {
-    return { index: props.index, data: props.data };
+    return { index: props.index, uuid, data: props.data };
+  },
+  options: {
+    dropEffect: dropEffect.value
   },
   collect: (monitor) => ({
-    isDragging: monitor.isDragging(),
-    handlerId: monitor.getHandlerId()
+    canDrag: monitor.canDrag(),
+    getItem: monitor.getItem(),
+    getItemType: monitor.getItemType(),
+    isDragging: monitor.isDragging()
   }),
-  canDrag: () => canDrag.value
+  end: (data, monitor) => {
+    const didDrop = monitor.didDrop();
+    const dropResult = monitor.getDropResult() as DropResult;
+    const isSelf = uuid === dropResult.uuid;
+    if (didDrop && dropResult) {
+      props.dragEnd({ ...data, isSelf });
+    }
+  }
 }));
-const [, drop] = useDrop(() => ({
+const [dropCollect, drop] = useDrop(() => ({
   accept: acceptName.value,
-  hover: (item: any, monitor: any) => {
-    // console.log(
-    //   'DraggableItem Hover',
-    //   item,
-    //   props.uuid,
-    //   monitor.getHandlerId(),
-    //   monitor.getItemType()
-    // );
-    sortHandle(dragRef, item, props, monitor);
+  hover: (data: any, monitor: any) => {
+    // console.log('DraggableItem Hover', monitor);
+    // sortHandle(dragRef, item, props);
+    // if (!dragRef.value) {
+    //   return;
+    // }
+    // const dragIndex = item.index;
+    // const hoverIndex = props.index;
+    // if (dragIndex === hoverIndex) {
+    //   return;
+    // }
+    // props.isHovering(item, dragIndex, hoverIndex);
+    // item.index = hoverIndex;
   },
-  drop: (item: any, monitor: any) => {
-    // console.log('drop', item, monitor);
+  drop: (data: any, monitor: any) => {
+    const dragIndex = data.index;
+    const hoverIndex = props.index;
+    const isSelf = uuid === data.uuid;
+    props.dropMove(data.data, dragIndex, hoverIndex, isSelf);
+    return { ...data, uuid };
   },
   collect: (monitor: any) => ({
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    canDrop: monitor.canDrop(),
+    getItem: monitor.getItem(),
+    getDropResult: monitor.getDropResult()
   })
 }));
 
@@ -55,7 +91,13 @@ const setRef: any = (el: HTMLDivElement) => {
     class="draggable-item"
     :ref="setRef"
     :key="index"
+    v-show="
+      dropEffect === 'copy' ||
+      (dropEffect === 'move' && !dragCollect.isDragging)
+    "
   >
+    <!-- {{ JSON.stringify(dragCollect, null, 2) }} -->
+    <!-- {{ JSON.stringify(dropCollect, null, 2) }} -->
     <slot></slot>
   </div>
 </template>
