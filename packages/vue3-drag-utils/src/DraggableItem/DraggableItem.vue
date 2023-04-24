@@ -113,14 +113,4 @@ const showState = (dropEffect: any, dragCollect: any) => {
 .draggable-item {
   cursor: move;
 }
-// .v-enter-active,
-// .v-leave-active {
-//   transition: opacity 0s ease;
-// }
-
-// .v-enter-from,
-// .v-leave-to {
-//   opacity: 0;
-//   transform: scale(0.9);
-// }
 </style>
