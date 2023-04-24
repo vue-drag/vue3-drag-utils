@@ -6,7 +6,6 @@ export const sortMove = (
   hasItem: any
 ) => {
   const clone = [...list.value];
-  console.log('sortMove', hasItem);
   hasItem && clone.splice(dragIndex, 1);
   clone.splice(hoverIndex, 0, item);
   list.value = clone;

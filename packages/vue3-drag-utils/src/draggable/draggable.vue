@@ -79,13 +79,20 @@ const dropMove = (
   isSelf && clone.splice(dragIndex, 1);
   clone.splice(hoverIndex, 0, item);
   dragList.value = clone;
+  // isSelf && dragList.value.splice(dragIndex, 1);
+  // dragList.value.splice(hoverIndex, 0, item);
 };
+
+const [mainDropCollect, drop] = useDrop(() => ({
+  accept: acceptName.value,
+  collect: (monitor: any) => ({
+    isOver: monitor.isOver()
+  })
+}));
+provide('mainDropCollect', mainDropCollect);
 </script>
 <template>
-  <TransitionGroup
-    name="list"
-    tag="div"
-  >
+  <div :ref="drop">
     <DraggableItem
       v-for="(item, index) in dragList"
       :key="itemKey ? item[itemKey] : item"
@@ -100,23 +107,6 @@ const dropMove = (
         :index="index"
       ></slot>
     </DraggableItem>
-  </TransitionGroup>
+  </div>
 </template>
-<style scoped lang="scss">
-.list-move, /* 对移动中的元素应用的过渡 */
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.2s ease;
-}
-
-// .list-enter-from,
-// .list-leave-to {
-//   // opacity: 0;
-// }
-
-/* 确保将离开的元素从布局流中删除
-  以便能够正确地计算移动的动画。 */
-.list-leave-active {
-  position: absolute;
-}
-</style>
+<style scoped lang="scss"></style>

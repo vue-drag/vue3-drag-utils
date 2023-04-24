@@ -25,7 +25,7 @@ const typeName: any = ref(inject('typeName'));
 const acceptName: any = ref(inject('acceptName'));
 const canDrag = ref<boolean>(inject('canDrag', true));
 const dropEffect = ref<string | undefined>(inject('dropEffect'));
-
+const mainDropCollect: any = ref(inject('mainDropCollect'));
 const [dragCollect, drag] = useDrag(() => ({
   type: typeName.value,
   canDrag: () => canDrag.value,
@@ -43,7 +43,6 @@ const [dragCollect, drag] = useDrag(() => ({
     uuid: uuid.value
   }),
   end: (data, monitor) => {
-    console.log('end', uuid.value);
     const didDrop = monitor.didDrop();
     const dropResult = monitor.getDropResult() as DropResult;
     const isSelf = uuid.value === dropResult?.uuid;
@@ -55,7 +54,7 @@ const [dragCollect, drag] = useDrag(() => ({
 const [dropCollect, drop] = useDrop(() => ({
   accept: acceptName.value,
   hover: (data: any, monitor: any) => {
-    // console.log('DraggableItem Hover', monitor);
+    // console.log('DraggableItem Hover', data, monitor);
     // sortHandle(dragRef, item, props);
     // if (!dragRef.value) {
     //   return;
@@ -88,27 +87,40 @@ const dragRef: any = ref<HTMLDivElement>();
 const setRef: any = (el: HTMLDivElement) => {
   dragRef.value = drag(drop(el)) as HTMLDivElement;
 };
+
+const showState = (dropEffect: any, dragCollect: any) => {
+  return !(
+    dropEffect === 'move' &&
+    !mainDropCollect.value.isOver &&
+    dragCollect.isDragging &&
+    uuid.value === dragCollect.getItem.uuid
+  );
+};
 </script>
 <template>
-  <div
-    class="draggable-item"
-    :ref="setRef"
-    :key="index"
-    v-show="
-      dropEffect === 'copy' ||
-      (dropEffect === 'move' && !dragCollect.isDragging)
-    "
-  >
-    {{ uuid }}
-    {{ JSON.stringify(dragCollect, null, 2) }}
-    <!-- {{ JSON.stringify(dropCollect, null, 2) }} -->
-    <!-- {{ dragCollect?.getItem?.uuid }} -->
-    <!-- {{ dragCollect?.getItem?.uuid && dragCollect?.getItem?.uuid === uuid }} -->
-    <slot></slot>
-  </div>
+  <Transition>
+    <div
+      class="draggable-item"
+      :ref="setRef"
+      :key="index"
+      v-show="showState(dropEffect, dragCollect)"
+    >
+      <slot></slot>
+    </div>
+  </Transition>
 </template>
 <style scoped lang="scss">
 .draggable-item {
   cursor: move;
 }
+// .v-enter-active,
+// .v-leave-active {
+//   transition: opacity 0s ease;
+// }
+
+// .v-enter-from,
+// .v-leave-to {
+//   opacity: 0;
+//   transform: scale(0.9);
+// }
 </style>
