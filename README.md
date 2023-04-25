@@ -21,6 +21,12 @@ Experience better drag and drop tools
 # In progress
 ```
 
+## Develop
+
+```shell
+cd packages/vue3-drag-utils
+```
+
 ## License
 
 [MIT](./license)
