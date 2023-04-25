@@ -1,2 +1,9 @@
 tsconfig.json
 .vscode
+src
+.eslintignore
+.eslintrc-auto-import.json
+.eslintrc.cjs
+.prettierrc.json
+tsconfig.node.json
+vite.config.ts
