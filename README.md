@@ -1,25 +1,24 @@
-# VitePress-Custom
+# Vue3-Drag-Utils
 
 ## Brief
 
-Added some features on the basis of  [vitepress](https://vitepress.vuejs.org)
+Experience better drag and drop tools
 
 ## Features
 
-- nav：automatic generate the navigation bar based on the file directory
-- sidebar：automatic generate the sidebar based on the file directory
-- search：developing
+- Drag move or clone
+- Disabled
+
+## ToDo
+
+- Multi-select Drag and Drop
+- Nested Drag and Drop
+- transition
 
 ## Usage
 
 ```shell
-# Global import dependency
-npm i @vitepress-custom/vitepress-custom-cli -g
-# init
-vitepress-custom init
-# Waiting for initialization to complete
-npm install
-npm run dev
+# In progress
 ```
 
 ## License
@@ -27,4 +26,4 @@ npm run dev
 [MIT](./license)
 
 ## Repository
-https://github.com/vitepress-custom
+https://github.com/huyikai/vue3-drag-utils
