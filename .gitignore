@@ -23,3 +23,5 @@ package-lock.json
 yarn.lock
 
 .env
+packages/vue3-drag-utils/es
+packages/vue3-drag-utils/lib
