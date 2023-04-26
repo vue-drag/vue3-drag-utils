@@ -16,7 +16,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: ls -l
       - run: pwd
-      - run: cd /packages/vue3-drag-utils
+      - run: cd packages/vue3-drag-utils
       - run: ls -l
       - run: pwd
       # - run: npm i
