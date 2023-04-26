@@ -15,7 +15,7 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Change directory to packages/vue3-drag-utils
-        run: cd packages/vue3-drag-utils && echo "Current directory: $(pwd)"
+        run: cd packages/vue3-drag-utils
       - name: List files in current directory
         run: ls -l
       - run: npm i
