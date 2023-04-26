@@ -14,14 +14,9 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: ls -l
-      - run: pwd
       - run: cd packages/vue3-drag-utils
-      - run: ls -l
-      - run: pwd
-      # - run: npm i
-      # - run: npm run build
-      # - run: pwd
-      # - run: npm publish
+      - run: npm i
+      - run: npm run build
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
