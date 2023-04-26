@@ -14,7 +14,8 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: cd packages/vue3-drag-utils
+      - name: Change directory to packages/vue3-drag-utils
+        run: cd packages/vue3-drag-utils
       - run: npm i
       - run: npm run build
       - run: npm publish
