@@ -16,10 +16,12 @@
   "type": "module",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "vue-tsc && vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ts":"tsc --declaration --emitDeclarationOnly"
   },
   "dependencies": {
     "@vitepress-custom/vitepress-plugin-sidebar": "^0.0.8",
