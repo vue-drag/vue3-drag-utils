@@ -27,17 +27,17 @@ export default defineConfig(() => {
         imports: ['vue'],
         // Generate automatically imported TS claim file
         dts: 'types/auto-imports.d.ts'
-      }),
-      Components({
-        /* options */
-        dts: 'types/components.d.ts',
-        dirs: ['.vitepress'],
-        resolvers: [
-          AntDesignVueResolver({
-            resolveIcons: true
-          })
-        ]
       })
+      // Components({
+      //   /* options */
+      //   dts: 'types/components.d.ts',
+      //   dirs: ['.vitepress'],
+      //   resolvers: [
+      //     AntDesignVueResolver({
+      //       resolveIcons: true
+      //     })
+      //   ]
+      // })
     ]
   };
 });
