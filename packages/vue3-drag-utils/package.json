@@ -21,7 +21,7 @@
     "build": "vue-tsc && vite build",
     "dev": "vite",
     "preview": "vite preview",
-    "ts":"tsc --declaration --emitDeclarationOnly"
+    "ts": "tsc --declaration --emitDeclarationOnly --module esnext"
   },
   "dependencies": {
     "@vitepress-custom/vitepress-plugin-sidebar": "^0.0.8",
