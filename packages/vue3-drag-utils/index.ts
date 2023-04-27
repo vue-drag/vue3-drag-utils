@@ -1,5 +1,5 @@
-import DndProvider from './src/DndProvider';
-import draggable from './src/Draggable';
+import DndProvider from '@/DndProvider';
+import draggable from '@/Draggable';
 
 // Introduce on demand
 export { draggable, DndProvider };
