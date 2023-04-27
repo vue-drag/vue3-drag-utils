@@ -6,7 +6,8 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-  return { 
+  return {
+    base: '/vue3-drag-utils/',
     server: {
       open: '/contents/Example/Simple.html'
     },
