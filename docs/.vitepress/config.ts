@@ -5,6 +5,7 @@ import docsData from '@vitepress-custom/vitepress-plugin-fetch-docs';
 export default async () => {
   let pages = await docsData();
   return {
+    base: '/vue3-drag-utils/',
     title: 'Vue3-Drag-Utils',
     description: 'Vue3-Drag-Utils.',
     head: [
