@@ -39,7 +39,6 @@
     "vue": "^3.2.45"
   },
   "dependencies": {
-    "ant-design-vue": "^3.2.16",
-    "vue3-drag-utils": "^0.0.3"
+    "ant-design-vue": "^3.2.16"
   }
 }

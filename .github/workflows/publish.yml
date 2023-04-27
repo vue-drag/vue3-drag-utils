@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Checkout  ️
         uses: actions/checkout@v3
-
+      - name: Package Build
+        run: |
+          cd packages/vue3-drag-utils
+          ls -l
       - name: Install and Build   
         run: |
           npm install
