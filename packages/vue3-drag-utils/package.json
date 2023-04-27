@@ -18,7 +18,7 @@
   "module": "es/index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "dev": "vite",
     "preview": "vite preview",
     "ts": "tsc --declaration --emitDeclarationOnly --module esnext"
