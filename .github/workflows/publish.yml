@@ -15,12 +15,9 @@ jobs:
       - name: Package Build
         run: |
           npm i
-          npm i --workspaces
           cd packages/vue3-drag-utils
           ls -l
-          npm i --workspaces
-          cd src/types
-          ls -l
+          npm i
           npm run build
       - name: Install and Build   
         run: |
