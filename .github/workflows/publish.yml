@@ -1,25 +1,31 @@
-name: Public Npm
-
+name: Build and Deploy
 on:
   push:
-    branches: [master]
-
+    branches:
+      - master
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
     steps:
-      - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Change directory to packages/vue3-drag-utils
-        run: cd packages/vue3-drag-utils
-      - name: List files in current directory
-        run: ls -l
-      - run: npm i
-      - run: npm run build
-      - run: npm publish
+      - name: Checkout  ️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install and Build   
+        run: |
+          npm install
+          npm run build
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_OPTIONS: '--max_old_space_size=4096'
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
+        # 环境变量
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为 vitepress 的默认输出目录
+          build_dir: docs/.vitepress/dist
