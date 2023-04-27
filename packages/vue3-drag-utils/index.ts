@@ -1,5 +1,5 @@
-import DndProvider from '@/DndProvider';
-import draggable from '@/Draggable';
+import DndProvider from '@/DndProvider/DndProvider.vue';
+import draggable from '@/Draggable/Draggable.vue';
 
 // Introduce on demand
 export { draggable, DndProvider };
