@@ -8,6 +8,10 @@
     "vue-dnd",
     "vue3-drag"
   ],
+  "homepage": "https://huyikai.github.io/vue3-drag-utils/",
+  "bugs": {
+    "url": "https://github.com/huyikai/vue3-drag-utils/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/huyikai/vue3-drag-utils"
