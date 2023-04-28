@@ -18,7 +18,7 @@ import VPButton from 'vitepress/dist/client/theme-default/components/VPButton.vu
         size="medium"
         theme="brand"
         text="Docs"
-        href="/contents/Docs/1.Getting%20Started.html"
+        href="/contents/Docs/Getting%20Started.html"
       >
       </VPButton>
       <VPButton
