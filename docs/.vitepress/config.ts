@@ -9,7 +9,7 @@ export default async () => {
     title: 'Vue3-Drag-Utils',
     description: 'Vue3-Drag-Utils.',
     head: [
-      ['link', { rel: 'icon', href: '/favicon.ico' }] //浏览器标签icon
+      ['link', { rel: 'icon', href: '/vue3-drag-utils/favicon.ico' }] //浏览器标签icon
     ],
     themeConfig: {
       pages, // 所有页面
