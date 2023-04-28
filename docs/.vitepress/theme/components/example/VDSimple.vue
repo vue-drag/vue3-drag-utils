@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { DeleteOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 const list: any = ref([]);
 const enabled = ref(true);
@@ -67,7 +68,7 @@ const deleteHandle = (index: number) => {
           <template #item="{ data, index }">
             <div class="box">
               <div>{{ data.name }}</div>
-              <delete-outlined @click="deleteHandle(index)" />
+              <DeleteOutlined @click="deleteHandle(index)" />
             </div>
           </template>
         </draggable>
@@ -80,7 +81,6 @@ const deleteHandle = (index: number) => {
         </RawDisplay>
       </a-col>
     </a-row>
-
     <CommonTable :dataSource="dataSource"> </CommonTable>
   </div>
 </template>

@@ -2,14 +2,14 @@ import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+// import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
   return {
     base: '/vue3-drag-utils/',
     server: {
-      open: '/contents/Example/Simple.html'
+      open: '/vue3-drag-utils/contents/Example/Simple.html'
     },
     resolve: {
       alias: {
@@ -28,17 +28,17 @@ export default defineConfig(() => {
         imports: ['vue'],
         // Generate automatically imported TS claim file
         dts: 'types/auto-imports.d.ts'
+      }),
+      Components({
+        /* options */
+        dts: 'types/components.d.ts',
+        dirs: ['.vitepress']
+        // resolvers: [
+        //   AntDesignVueResolver({
+        //     resolveIcons: true
+        //   })
+        // ]
       })
-      // Components({
-      //   /* options */
-      //   dts: 'types/components.d.ts',
-      //   dirs: ['.vitepress'],
-      //   resolvers: [
-      //     AntDesignVueResolver({
-      //       resolveIcons: true
-      //     })
-      //   ]
-      // })
     ]
   };
 });

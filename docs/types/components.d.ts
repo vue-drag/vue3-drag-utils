@@ -9,18 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ACol: typeof import('ant-design-vue/es')['Col']
-    AForm: typeof import('ant-design-vue/es')['Form']
-    AFormItem: typeof import('ant-design-vue/es')['FormItem']
-    ARadioButton: typeof import('ant-design-vue/es')['RadioButton']
-    ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
-    ARow: typeof import('ant-design-vue/es')['Row']
-    ASwitch: typeof import('ant-design-vue/es')['Switch']
-    ATable: typeof import('ant-design-vue/es')['Table']
     CodeDisplay: typeof import('./../.vitepress/theme/components/CodeDisplay/index.vue')['default']
     CommonTable: typeof import('./../.vitepress/theme/components/CommonTable/index.vue')['default']
-    DeleteOutlined: typeof import('@ant-design/icons-vue')['DeleteOutlined']
     DisplayLayout: typeof import('./../.vitepress/theme/components/DisplayLayout/index.vue')['default']
     Home: typeof import('./../.vitepress/theme/components/home.vue')['default']
     IconArrowRight: typeof import('./../.vitepress/theme/components/icons/iconArrowRight.vue')['default']
