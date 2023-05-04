@@ -19,6 +19,9 @@ export default async () => {
       outlineTitle: 'Catalog', //右侧 侧边栏标题
       // 导航栏
       nav: [...navParser(pages, 'contents')],
+      search: {
+        provider: 'local' // 离线搜索
+      },
       // 侧边栏
       sidebar: sidebar(pages, 'docs', true),
       // 社交链接
