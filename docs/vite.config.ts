@@ -9,7 +9,7 @@ export default defineConfig(() => {
   return {
     base: '/vue3-drag-utils/',
     server: {
-      open: '/vue3-drag-utils/contents/Example/Simple.html'
+      open: '/vue3-drag-utils/'
     },
     resolve: {
       alias: {
