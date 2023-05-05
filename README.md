@@ -58,7 +58,7 @@ app.mount('#app');
 ## Develop
 
 ```shell
-git clone https://github.com/huyikai/vue3-drag-utils
+git clone https://github.com/vue-drag/vue3-drag-utils
 cd packages/vue3-drag-utils
 # Do some development
 npm run build
@@ -69,4 +69,4 @@ npm run build
 [MIT](./license)
 
 ## Repository
-https://github.com/huyikai/vue3-drag-utils
+https://github.com/vue-drag/vue3-drag-utils
